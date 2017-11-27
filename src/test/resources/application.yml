@@ -1,0 +1,28 @@
+server:
+  tomcat:
+    max-threads: 100
+    min-spare-threads: 20
+  connection-timeout: 5000
+  ssl:
+    key-store: classpath:.keystore
+    key-store-type: JKS
+    key-password: qq123456
+    key-alias: tomcat
+  port: 8080
+spring:  
+  redis:
+    database: 1
+    host: 121.43.110.87
+    pool:
+      max-active: 20
+  datasource: 
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://IP:3306/dbName?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=UTF-8
+    username: xxx
+    password: xxx
+    type: com.alibaba.druid.pool.DruidDataSource
+    # Hikari的数据源配置：
+    hikari:
+      
+    
+        
