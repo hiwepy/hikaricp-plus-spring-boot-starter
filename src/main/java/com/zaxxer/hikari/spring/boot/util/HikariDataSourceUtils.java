@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.util.CollectionUtils;
 
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.spring.boot.HikaricpProperties;
@@ -76,8 +77,12 @@ public class HikariDataSourceUtils {
 			dataSource.setCatalog(hikariProperties.getCatalog());
 		}
 		
-		dataSource.setDataSourceProperties(hikariProperties.getDataSourceProperties());
-		dataSource.setHealthCheckProperties(hikariProperties.getHealthCheckProperties());
+		if(!CollectionUtils.isEmpty(hikariProperties.getDataSourceProperties())) {
+			dataSource.setDataSourceProperties(hikariProperties.getDataSourceProperties());
+		}
+		if(!CollectionUtils.isEmpty(hikariProperties.getHealthCheckProperties())) {
+			dataSource.setHealthCheckProperties(hikariProperties.getHealthCheckProperties());
+		}
 		
 		return dataSource;
 	}

@@ -43,7 +43,7 @@ public class HikaricpProperties {
 	/** initializationFailTimeout: 连接池初始化失败超时时间；单位 (毫秒) */
 	private long initializationFailTimeout = 1;
 	/** minIdle: 连接池最小连接数量 */
-	private int minIdle = -1;
+	private int minIdle = 5;
 	/** maxPoolSize: 连接池最大连接数量 */
 	protected Integer maxPoolSize = 50;
 	/** maxLifetime: 连接存活时间 */
@@ -77,9 +77,9 @@ public class HikaricpProperties {
 	 */
 	private long leakDetectionThreshold = 0;
 	/** dataSourceProperties: 连接池初始化参数 */
-	private Properties dataSourceProperties;
+	private Properties dataSourceProperties = new Properties();
 	/** healthCheckProperties: 连接池监控参数 */
-	private Properties healthCheckProperties;
+	private Properties healthCheckProperties = new Properties();
 
 	public boolean isEnabled() {
 		return enabled;

@@ -23,7 +23,7 @@ import com.zaxxer.hikari.spring.boot.util.HikariDataSourceUtils;
 
 @Configuration
 @ConditionalOnClass({ HikariDataSource.class })
-@ConditionalOnProperty(prefix = HikaricpDynamicProperties.PREFIX, value = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = HikaricpDynamicProperties.PREFIX, value = "enabled", havingValue = "true")
 @EnableConfigurationProperties({ HikaricpDynamicProperties.class })
 public class HikaricpDynamicAutoConfiguration {
 
