@@ -13,20 +13,18 @@ import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.metrics.MetricsTrackerFactory;
 import com.zaxxer.hikari.metrics.dropwizard.CodahaleMetricsTrackerFactory;
 
-import io.micrometer.core.instrument.MeterRegistry;
-
 /**
  * 
  * @className	： HikaricpWithDropwizardAutoConfiguration
- * @description	： TODO(描述这个类的作用)
+ * @description	： 基于Dropwizard监控组件的HikariDataSource监控
  * @author 		： <a href="https://github.com/vindell">vindell</a>
  * @date		： 2017年11月27日 下午9:50:09
  * @version 	V1.0
  */
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )
-@ConditionalOnClass({ HikariDataSource.class, MetricRegistry.class, MeterRegistry.class })
-@ConditionalOnProperty(prefix = HikaricpWithMetricProperties.PREFIX, value = "enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnClass({ HikariDataSource.class, MetricRegistry.class})
+@ConditionalOnProperty(prefix = HikaricpWithMetricProperties.PREFIX, value = "type", havingValue = "dropwizard", matchIfMissing = false)
 @EnableConfigurationProperties({ HikaricpWithMetricProperties.class })
 public class HikaricpWithDropwizardAutoConfiguration {
 	

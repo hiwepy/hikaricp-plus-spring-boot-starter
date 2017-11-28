@@ -16,9 +16,7 @@ public class HikaricpProperties {
 	 * Enable Hikari.
 	 */
 	private boolean enabled = false;
-	/**
-	 * name: 数据源名称；配置这个属性的意义在于，如果存在多个数据源，监控的时候可以通过名字来区分开来。如果没有配置，将会生成一个名字，格式是：”DataSource-” + System.identityHashCode(this)
-	 */
+	/** name: 数据源名称；配置这个属性的意义在于，如果存在多个数据源，监控的时候可以通过名字来区分开来 */
 	private String name;
 	/** jndiName: 数据库jndi名称 */
 	private String jndiName;
@@ -39,8 +37,6 @@ public class HikaricpProperties {
 	protected String username;
 	/** password: 连接数据库的密码 */
 	protected String password;
-	/** connectionProperties: 连接数据库的额外参数 */
-	protected Properties connectionProperties = new Properties();
 
 	/** Hikari 连接池参数 */
 
@@ -163,14 +159,6 @@ public class HikaricpProperties {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Properties getConnectionProperties() {
-		return connectionProperties;
-	}
-
-	public void setConnectionProperties(Properties connectionProperties) {
-		this.connectionProperties = connectionProperties;
 	}
 
 	public long getInitializationFailTimeout() {

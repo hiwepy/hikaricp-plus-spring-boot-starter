@@ -8,25 +8,24 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.codahale.metrics.MetricRegistry;
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.metrics.MetricsTrackerFactory;
 import com.zaxxer.hikari.metrics.prometheus.PrometheusMetricsTrackerFactory;
 
-import io.micrometer.core.instrument.MeterRegistry;
+import io.prometheus.client.CollectorRegistry;
 
 /**
  * 
  * @className	： HikaricpWithOnPrometheusAutoConfiguration
- * @description	： TODO(描述这个类的作用)
+ * @description	： 基于Prometheus监控平台的HikariDataSource监控
  * @author 		： <a href="https://github.com/vindell">vindell</a>
  * @date		： 2017年11月27日 下午9:50:01
  * @version 	V1.0
  */
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )
-@ConditionalOnClass({ HikariDataSource.class, MetricRegistry.class, MeterRegistry.class })
-@ConditionalOnProperty(prefix = HikaricpWithMetricProperties.PREFIX, value = "enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnClass({ HikariDataSource.class, CollectorRegistry.class })
+@ConditionalOnProperty(prefix = HikaricpWithMetricProperties.PREFIX, value = "type", havingValue = "prometheus", matchIfMissing = false)
 @EnableConfigurationProperties({ HikaricpWithMetricProperties.class })
 public class HikaricpWithOnPrometheusAutoConfiguration {
 	

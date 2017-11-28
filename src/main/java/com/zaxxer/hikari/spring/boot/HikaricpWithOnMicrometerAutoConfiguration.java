@@ -22,7 +22,7 @@ import io.micrometer.core.instrument.util.HierarchicalNameMapper;
 /**
  * 
  * @className	： HikaricpWithOnMicrometerAutoConfiguration
- * @description	： TODO(描述这个类的作用)
+ * @description	：  基于Micrometer监控组件的HikariDataSource监控
  * @author 		： <a href="https://github.com/vindell">vindell</a>
  * @date		： 2017年11月27日 下午9:50:05
  * @version 	V1.0
@@ -30,7 +30,7 @@ import io.micrometer.core.instrument.util.HierarchicalNameMapper;
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )
 @ConditionalOnClass({ HikariDataSource.class, MetricRegistry.class, MeterRegistry.class })
-@ConditionalOnProperty(prefix = HikaricpWithMetricProperties.PREFIX, value = "enabled", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(prefix = HikaricpWithMetricProperties.PREFIX, value = "type", havingValue = "micrometer", matchIfMissing = false)
 @EnableConfigurationProperties({ HikaricpWithMetricProperties.class })
 public class HikaricpWithOnMicrometerAutoConfiguration {
 
