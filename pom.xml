@@ -41,6 +41,7 @@
 		<hikaricp.version>2.7.4</hikaricp.version>
 		<micrometer.version>0.12.0.RELEASE</micrometer.version>
 		<prometheus.version>0.1.0</prometheus.version>
+		<sharding-jdbc.version>2.0.0.M3</sharding-jdbc.version>
 	</properties>
 	
 	<dependencies>
@@ -73,16 +74,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- 引入log4j2依赖 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
-		</dependency>
-		<!-- 加上这个才能辨认到log4j2.yml文件 -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-yaml</artifactId>
-		</dependency>
 		<!-- Spring Boot Test 依赖 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -100,21 +91,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-autoconfigure</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-			<optional>true</optional>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 		<!-- 与数据库操作相关的依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
+            <exclusions>
+            	<exclusion>
+            		<groupId>org.apache.tomcat</groupId>
+            		<artifactId>tomcat-jdbc</artifactId>
+            	</exclusion>
+            </exclusions>
         </dependency>
 		
 		<!-- exclude tomcat-jdbc, Spring Boot will use HikariCP automatically -->
@@ -122,6 +108,43 @@
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 		</dependency>
+		
+		<!-- http://mvnrepository.com/artifact/io.shardingjdbc -->
+		<dependency>
+		    <groupId>io.shardingjdbc</groupId>
+		    <artifactId>sharding-jdbc-core</artifactId>
+		    <version>${sharding-jdbc.version}</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>io.shardingjdbc</groupId>
+		    <artifactId>sharding-jdbc-transaction</artifactId>
+		    <version>${sharding-jdbc.version}</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>io.shardingjdbc</groupId>
+		    <artifactId>sharding-jdbc-transaction-storage</artifactId>
+		    <version>${sharding-jdbc.version}</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>io.shardingjdbc</groupId>
+		    <artifactId>sharding-jdbc-orchestration</artifactId>
+		    <version>${sharding-jdbc.version}</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<!-- <dependency>
+		    <groupId>io.shardingjdbc</groupId>
+		    <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+		    <version>${sharding-jdbc.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.shardingjdbc</groupId>
+		    <artifactId>sharding-jdbc-orchestration-spring-boot-starter</artifactId>
+		    <version>${sharding-jdbc.version}</version>
+		</dependency> -->
 		
 		<!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-core -->
 		<dependency>
@@ -153,11 +176,6 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.6</version>
 		</dependency>
-		
-		<dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
