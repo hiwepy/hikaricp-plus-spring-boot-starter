@@ -3,9 +3,12 @@ package com.zaxxer.hikari.spring.boot;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,6 +26,7 @@ import com.zaxxer.hikari.spring.boot.util.HikariDataSourceUtils;
 
 @Configuration
 @ConditionalOnClass({ HikariDataSource.class })
+@ConditionalOnMissingBean(DataSource.class)
 @ConditionalOnProperty(prefix = HikaricpDynamicProperties.PREFIX, value = "enabled", havingValue = "true")
 @EnableConfigurationProperties({ HikaricpDynamicProperties.class })
 public class HikaricpDynamicAutoConfiguration {
