@@ -116,7 +116,7 @@
 		    <scope>provided</scope>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/io.prometheus/simpleclient -->
+		<!-- https://mvnrepository.com/artifact/io.prometheus/sampleclient -->
 		<dependency>
 		    <groupId>io.prometheus</groupId>
 		    <artifactId>simpleclient</artifactId>
