@@ -21,7 +21,7 @@
 </dependency>
 ```
 
-### Simple
+### Sample
 
-[https://github.com/vindell/spring-boot-starter-samples/tree/master/spring-boot-simple-hikaricp](https://github.com/vindell/spring-boot-starter-samples/tree/master/spring-boot-simple-hikaricp "spring-boot-simple-hikaricp")
+[https://github.com/vindell/spring-boot-starter-samples/tree/master/spring-boot-sample-hikaricp](https://github.com/vindell/spring-boot-starter-samples/tree/master/spring-boot-sample-hikaricp "spring-boot-sample-hikaricp")
 
