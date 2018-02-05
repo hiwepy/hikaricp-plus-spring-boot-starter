@@ -1,6 +1,5 @@
 package com.zaxxer.hikari.spring.boot;
 
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -26,10 +25,9 @@ import com.zaxxer.hikari.spring.boot.util.HikariDataSourceUtils;
  * @version 	V1.0
  */
 @Configuration
-@ConditionalOnClass({ HikariDataSource.class })
-@ConditionalOnProperty(name = { "spring.datasource.hikari.enabled" }, havingValue = "true", matchIfMissing = true)
-@EnableConfigurationProperties({ HikaricpProperties.class})
-@AutoConfigureAfter(HikaricpDynamicAutoConfiguration.class)
+@ConditionalOnClass(com.zaxxer.hikari.HikariDataSource.class)
+@ConditionalOnProperty("spring.datasource.hikari")
+@EnableConfigurationProperties({ HikaricpProperties.class, DataSourceProperties.class })
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 public class HikaricpAutoConfiguration {
 	

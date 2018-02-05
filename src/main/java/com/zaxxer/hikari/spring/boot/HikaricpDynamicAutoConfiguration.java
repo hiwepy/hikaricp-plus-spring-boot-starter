@@ -3,12 +3,10 @@ package com.zaxxer.hikari.spring.boot;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -25,13 +23,18 @@ import com.zaxxer.hikari.spring.boot.util.HikariDataSourceUtils;
 
 
 @Configuration
-@ConditionalOnClass({ HikariDataSource.class })
-@ConditionalOnMissingBean(DataSource.class)
-@ConditionalOnProperty(prefix = HikaricpDynamicProperties.PREFIX, value = "enabled", havingValue = "true")
-@EnableConfigurationProperties({ HikaricpDynamicProperties.class })
+@ConditionalOnClass(com.zaxxer.hikari.HikariDataSource.class)
+@ConditionalOnProperty("spring.datasource.hikari")
+@EnableConfigurationProperties({ HikaricpDynamicProperties.class, HikaricpProperties.class, DataSourceProperties.class })
+@AutoConfigureBefore(HikaricpAutoConfiguration.class)
 public class HikaricpDynamicAutoConfiguration {
 
+	@Autowired(required = false) 
+	@Qualifier("targetDataSources") 
+	protected Map<Object, Object> targetDataSources;
+	
 	@Bean("targetDataSources")
+	@ConditionalOnProperty(prefix = HikaricpDynamicProperties.PREFIX, value = "enabled", havingValue = "true")
 	public Map<Object, Object> targetDataSources() {
 		return new HashMap<Object, Object>();
 	}
@@ -41,10 +44,10 @@ public class HikaricpDynamicAutoConfiguration {
 	 * @Qualifier 根据名称进行注入，通常是在具有相同的多个类型的实例的一个注入（例如有多个DataSource类型的实例）
 	 */
 	@Bean(DataSourceContextHolder.DEFAULT_DATASOURCE)
+	@ConditionalOnProperty(prefix = HikaricpDynamicProperties.PREFIX, value = "enabled", havingValue = "true")
 	@Primary
 	public DynamicDataSource dynamicDataSource(DataSourceProperties properties, HikaricpProperties HikariProperties,
-			HikaricpDynamicProperties dynamicProperties,
-			@Autowired(required = false) @Qualifier("targetDataSources") Map<Object, Object> targetDataSources) {
+			HikaricpDynamicProperties dynamicProperties) {
 
 		if(targetDataSources == null) {
 			targetDataSources = new HashMap<Object, Object>();
