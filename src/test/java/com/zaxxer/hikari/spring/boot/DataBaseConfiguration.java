@@ -8,7 +8,6 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,13 +21,10 @@ import com.zaxxer.hikari.HikariDataSource;
 @EnableTransactionManagement  
 public class DataBaseConfiguration implements EnvironmentAware {  
 
-  private RelaxedPropertyResolver propertyResolver;  
-
   private static Logger log = LoggerFactory.getLogger(DataBaseConfiguration.class);  
     
   @Override  
   public void setEnvironment(Environment env) {  
-      this.propertyResolver = new RelaxedPropertyResolver(env, "jdbc.");  
   }  
 
   @Bean(name="writeDataSource", destroyMethod = "close", initMethod="init")  
@@ -37,11 +33,11 @@ public class DataBaseConfiguration implements EnvironmentAware {
       log.debug("Configruing Write DataSource");  
         
       HikariDataSource datasource = new HikariDataSource();  
-      datasource.setJdbcUrl(propertyResolver.getProperty("url"));  
+     /* datasource.setJdbcUrl(propertyResolver.getProperty("url"));  
       datasource.setDriverClassName(propertyResolver.getProperty("driverClassName"));  
       datasource.setUsername(propertyResolver.getProperty("username"));  
       datasource.setPassword(propertyResolver.getProperty("password"));  
-        
+       */ 
       return datasource;  
   }  
     
@@ -50,11 +46,11 @@ public class DataBaseConfiguration implements EnvironmentAware {
       log.debug("Configruing Read One DataSource");  
         
       HikariDataSource datasource = new HikariDataSource();  
-      datasource.setJdbcUrl(propertyResolver.getProperty("url"));  
+     /* datasource.setJdbcUrl(propertyResolver.getProperty("url"));  
       datasource.setDriverClassName(propertyResolver.getProperty("driverClassName"));  
       datasource.setUsername(propertyResolver.getProperty("username"));  
       datasource.setPassword(propertyResolver.getProperty("password"));  
-        
+        */
       return datasource;  
   }  
     
@@ -63,11 +59,11 @@ public class DataBaseConfiguration implements EnvironmentAware {
       log.debug("Configruing Read Two DataSource");  
         
       HikariDataSource datasource = new HikariDataSource();  
-      datasource.setJdbcUrl(propertyResolver.getProperty("url"));  
+      /*datasource.setJdbcUrl(propertyResolver.getProperty("url"));  
       datasource.setDriverClassName(propertyResolver.getProperty("driverClassName"));  
       datasource.setUsername(propertyResolver.getProperty("username"));  
       datasource.setPassword(propertyResolver.getProperty("password"));  
-        
+        */
       return datasource;  
   }  
     
