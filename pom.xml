@@ -38,9 +38,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-		<hikaricp.version>2.7.4</hikaricp.version>
-		<micrometer.version>0.12.0.RELEASE</micrometer.version>
-		<prometheus.version>0.1.0</prometheus.version>
+		<prometheus.version>0.2.0</prometheus.version>
 	</properties>
 	
 	<dependencies>
@@ -112,9 +110,63 @@
 		<dependency>
 		    <groupId>io.micrometer</groupId>
 		    <artifactId>micrometer-core</artifactId>
-		    <version>${micrometer.version}</version>
 		    <scope>provided</scope>
 		</dependency>
+		<dependency>
+             <groupId>io.micrometer</groupId>
+             <artifactId>micrometer-registry-atlas</artifactId>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>io.micrometer</groupId>
+             <artifactId>micrometer-registry-datadog</artifactId>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>io.micrometer</groupId>
+             <artifactId>micrometer-registry-influx</artifactId>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>io.micrometer</groupId>
+             <artifactId>micrometer-registry-ganglia</artifactId>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>io.micrometer</groupId>
+             <artifactId>micrometer-registry-graphite</artifactId>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>io.micrometer</groupId>
+             <artifactId>micrometer-registry-jmx</artifactId>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>io.micrometer</groupId>
+             <artifactId>micrometer-registry-new-relic</artifactId>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>io.micrometer</groupId>
+             <artifactId>micrometer-registry-prometheus</artifactId>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>io.micrometer</groupId>
+             <artifactId>micrometer-registry-signalfx</artifactId>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>io.micrometer</groupId>
+             <artifactId>micrometer-registry-statsd</artifactId>
+             <scope>provided</scope>
+         </dependency>
+         <dependency>
+             <groupId>io.micrometer</groupId>
+             <artifactId>micrometer-registry-wavefront</artifactId>
+             <scope>provided</scope>
+         </dependency>
 		
 		<!-- https://mvnrepository.com/artifact/io.prometheus/sampleclient -->
 		<dependency>
@@ -123,6 +175,7 @@
 		    <version>${prometheus.version}</version>
 		    <scope>provided</scope>
 		</dependency>
+		
 		
 		<!-- Metrics is a Java library which gives you unparalleled insight into 
 					what your code does in production. Metrics provides a powerful toolkit of 
@@ -136,7 +189,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

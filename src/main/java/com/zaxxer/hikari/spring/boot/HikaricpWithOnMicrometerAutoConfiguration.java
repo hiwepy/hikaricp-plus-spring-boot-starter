@@ -1,12 +1,18 @@
 package com.zaxxer.hikari.spring.boot;
 
+import java.util.Map;
+
+import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.ObjectUtils;
 
 import com.codahale.metrics.MetricRegistry;
 import com.zaxxer.hikari.HikariDataSource;
@@ -16,7 +22,8 @@ import com.zaxxer.hikari.spring.boot.util.MicrometerSystemClock;
 
 import io.micrometer.core.instrument.Clock;
 import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.core.instrument.dropwizard.DropwizardMeterRegistry;
+import io.micrometer.core.instrument.composite.CompositeMeterRegistry;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import io.micrometer.core.instrument.util.HierarchicalNameMapper;
 
 /**
@@ -32,8 +39,10 @@ import io.micrometer.core.instrument.util.HierarchicalNameMapper;
 @ConditionalOnClass({ HikariDataSource.class, MetricRegistry.class, MeterRegistry.class })
 @ConditionalOnProperty(prefix = HikaricpWithMetricProperties.PREFIX, value = "type", havingValue = "micrometer", matchIfMissing = false)
 @EnableConfigurationProperties({ HikaricpWithMetricProperties.class })
-public class HikaricpWithOnMicrometerAutoConfiguration {
+public class HikaricpWithOnMicrometerAutoConfiguration implements ApplicationContextAware {
 
+	private ApplicationContext applicationContext;
+	
 	@Bean
 	@ConditionalOnMissingBean
 	public Clock clock() {
@@ -48,9 +57,14 @@ public class HikaricpWithOnMicrometerAutoConfiguration {
 	
 	@Bean
 	@ConditionalOnMissingBean(value = MetricsTrackerFactory.class)
-	public MeterRegistry meterRegistry(HierarchicalNameMapper nameMapper, Clock clock) {
-		DropwizardMeterRegistry meterRegistry = new DropwizardMeterRegistry(nameMapper, clock);
-		return meterRegistry;
+	public MeterRegistry meterRegistry(Clock clock) {
+		
+		Map<String, MeterRegistry> beansOfType = getApplicationContext().getBeansOfType(MeterRegistry.class);
+		if (!ObjectUtils.isEmpty(beansOfType)) {
+			return new CompositeMeterRegistry( clock, beansOfType.values());
+		}
+		
+		return new SimpleMeterRegistry();
 	}
 	
 	@Bean
@@ -60,5 +74,13 @@ public class HikaricpWithOnMicrometerAutoConfiguration {
 		return metricsTrackerFactory;
 	}
 	
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+	}
+
+	public ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
 
 }
