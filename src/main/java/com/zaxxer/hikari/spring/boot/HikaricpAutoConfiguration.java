@@ -17,12 +17,7 @@ import com.zaxxer.hikari.spring.boot.ds.DataSourceContextHolder;
 import com.zaxxer.hikari.spring.boot.util.HikariDataSourceUtils;
 
 /**
- * 
- * @className	： HikaricpAutoConfiguration
- * @description	： TODO(描述这个类的作用)
  * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年11月27日 下午8:54:30
- * @version 	V1.0
  */
 @Configuration
 @ConditionalOnClass(com.zaxxer.hikari.HikariDataSource.class)
@@ -32,19 +27,17 @@ import com.zaxxer.hikari.spring.boot.util.HikariDataSourceUtils;
 public class HikaricpAutoConfiguration {
 	
 	/**
-	 * 
-	 * @description	：  配置HikariDataSource
+	 * 配置HikariDataSource
 	 * @author 		： <a href="https://github.com/vindell">vindell</a>
-	 * @date 		：2017年11月27日 下午9:51:27
-	 * @param properties
-	 * @param HikariProperties
-	 * @return
+	 * @param properties {@link DataSourceProperties} 参数对象
+	 * @param hikariProperties {@link HikaricpProperties} 参数对象
+	 * @return {@link HikariDataSource} 数据源
 	 */
 	@Bean(DataSourceContextHolder.DEFAULT_DATASOURCE)
 	@ConditionalOnMissingBean(AbstractRoutingDataSource.class)
 	@Primary
-	public HikariDataSource HikariDataSource(DataSourceProperties properties, HikaricpProperties HikariProperties) {
-		return HikariDataSourceUtils.createDataSource(properties, HikariProperties, properties.determineUrl(),
+	public HikariDataSource HikariDataSource(DataSourceProperties properties, HikaricpProperties hikariProperties) {
+		return HikariDataSourceUtils.createDataSource(properties, hikariProperties, properties.determineUrl(),
 				properties.determineUsername(), properties.determinePassword());
 	}
 

@@ -15,12 +15,8 @@ import com.zaxxer.hikari.metrics.prometheus.PrometheusMetricsTrackerFactory;
 import io.prometheus.client.CollectorRegistry;
 
 /**
- * 
- * @className	： HikaricpWithOnPrometheusAutoConfiguration
- * @description	： 基于Prometheus监控平台的HikariDataSource监控
+ * 基于Prometheus监控平台的HikariDataSource监控
  * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年11月27日 下午9:50:01
- * @version 	V1.0
  */
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )

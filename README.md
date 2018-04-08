@@ -1,4 +1,4 @@
-# spring-boot-starter-hikaricp
+# spring-boot-starter-hikaricp-plus
 
 
 ### 说明
@@ -15,8 +15,8 @@
 
 ``` xml
 <dependency>
-	<groupId>${project.groupId}</groupId>
-	<artifactId>spring-boot-starter-websocket</artifactId>
+	<groupId>com.github.vindell</groupId>
+	<artifactId>spring-boot-starter-hikaricp-plus</artifactId>
 	<version>${project.version}</version>
 </dependency>
 ```

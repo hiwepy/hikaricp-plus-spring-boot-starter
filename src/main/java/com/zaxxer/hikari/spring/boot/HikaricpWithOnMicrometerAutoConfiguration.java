@@ -27,12 +27,8 @@ import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import io.micrometer.core.instrument.util.HierarchicalNameMapper;
 
 /**
- * 
- * @className	： HikaricpWithOnMicrometerAutoConfiguration
- * @description	：  基于Micrometer监控组件的HikariDataSource监控
+ * 基于Micrometer监控组件的HikariDataSource监控
  * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年11月27日 下午9:50:05
- * @version 	V1.0
  */
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )

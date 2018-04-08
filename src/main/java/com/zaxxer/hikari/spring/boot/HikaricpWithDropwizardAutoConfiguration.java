@@ -14,12 +14,8 @@ import com.zaxxer.hikari.metrics.MetricsTrackerFactory;
 import com.zaxxer.hikari.metrics.dropwizard.CodahaleMetricsTrackerFactory;
 
 /**
- * 
- * @className	： HikaricpWithDropwizardAutoConfiguration
- * @description	： 基于Dropwizard监控组件的HikariDataSource监控
+ * 基于Dropwizard监控组件的HikariDataSource监控
  * @author 		： <a href="https://github.com/vindell">vindell</a>
- * @date		： 2017年11月27日 下午9:50:09
- * @version 	V1.0
  */
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )
