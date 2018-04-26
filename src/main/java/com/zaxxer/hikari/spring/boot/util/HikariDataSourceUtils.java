@@ -13,17 +13,22 @@ public class HikariDataSourceUtils {
 
 	public static <T extends DataSource> HikariDataSource createDataSource(DataSourceProperties properties, HikaricpProperties hikariProperties, 
 			String jdbcUrl, String username, String password) {
-		// 创建 HikariDataSource 数据源对象
-		HikariDataSource dataSource = createDataSource(properties, properties.getType());
-
+		
+		DataSourceProperties tmProperties = new DataSourceProperties();
+		
+		tmProperties.setName(properties.getName());
+		tmProperties.setType(HikariDataSource.class);
 		// driverClassName : 数据库驱动 
-		dataSource.setDriverClassName(properties.determineDriverClassName());
+		tmProperties.setDriverClassName(properties.determineDriverClassName());
 		// jdbcUrl: 连接数据库的url
-		dataSource.setJdbcUrl(jdbcUrl);
+		tmProperties.setUrl(jdbcUrl);
 		// username: 连接数据库的用户名
-		dataSource.setUsername(username);
+		tmProperties.setUsername(username);
 		// password: 连接数据库的密码
-		dataSource.setPassword(password);
+		tmProperties.setPassword(password);
+		
+		// 创建 HikariDataSource 数据源对象
+		HikariDataSource dataSource = createDataSource(tmProperties, tmProperties.getType());
 
 		// Hikari 连接池参数
 		
