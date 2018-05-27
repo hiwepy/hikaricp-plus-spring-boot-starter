@@ -17,7 +17,7 @@
 <dependency>
 	<groupId>com.github.vindell</groupId>
 	<artifactId>spring-boot-starter-hikaricp-plus</artifactId>
-	<version>${project.version}</version>
+	<version>1.0.1.RELEASE</version>
 </dependency>
 ```
 
