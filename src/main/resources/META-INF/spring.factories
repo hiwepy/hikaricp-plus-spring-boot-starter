@@ -1,6 +1,5 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.zaxxer.hikari.spring.boot.HikaricpDynamicAutoConfiguration,\
 com.zaxxer.hikari.spring.boot.HikaricpAutoConfiguration,\
 com.zaxxer.hikari.spring.boot.HikaricpWithDropwizardAutoConfiguration,\
 com.zaxxer.hikari.spring.boot.HikaricpWithOnMicrometerAutoConfiguration,\

@@ -17,9 +17,13 @@ package com.zaxxer.hikari.spring.boot.ds;
 
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.util.ReflectionUtils;
@@ -28,20 +32,25 @@ import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.spring.boot.HikaricpProperties;
 import com.zaxxer.hikari.spring.boot.util.HikariDataSourceUtils;
 
-
 @SuppressWarnings("unchecked")
-public class DynamicDataSource extends AbstractRoutingDataSource {
+public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
-	protected static Field targetDataSourcesField = ReflectionUtils.findField(DynamicDataSource.class,
+	/**
+     * 用于在维护数据源时保证不会被其他线程修改
+     */
+    private static Lock lock = new ReentrantLock();
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	protected static Field targetDataSourcesField = ReflectionUtils.findField(DynamicRoutingDataSource.class,
 			"targetDataSources");
-	protected static Field resolvedDataSourcesField = ReflectionUtils.findField(DynamicDataSource.class,
+	protected static Field resolvedDataSourcesField = ReflectionUtils.findField(DynamicRoutingDataSource.class,
 			"resolvedDataSources");
-
+	
 	@Override
 	protected Object determineCurrentLookupKey() {
-		return DataSourceContextHolder.getDatabaseName();
+		 logger.info("Current DataSource is [{}]", DynamicDataSourceContextHolder.getDataSourceKey());
+		return DynamicDataSourceContextHolder.getDataSourceKey();
 	}
-
+	
 	public Map<Object, Object> getTargetDataSources() {
 		targetDataSourcesField.setAccessible(true);
 		Object targetDataSources = ReflectionUtils.getField(targetDataSourcesField, this);
@@ -55,59 +64,83 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 		resolvedDataSourcesField.setAccessible(false);
 		return (Map<Object, DataSource>) resolvedDataSources;
 	}
-
+	
 	public void setTargetDataSource(DataSourceProperties properties, HikaricpProperties HikariProperties,
 			String name, String url, String username, String password) {
 
-		// 动态创建Hikari数据源
-		HikariDataSource targetDataSource = HikariDataSourceUtils.createDataSource(properties, HikariProperties, url, username, password);
+		lock.lock();
+		
+		try {
+			
+			// 动态创建Hikari数据源
+			HikariDataSource targetDataSource = HikariDataSourceUtils.createDataSource(properties, HikariProperties, url, username, password);
 
-		getTargetDataSources().put(name, targetDataSource);
-
-		Object lookupKey = resolveSpecifiedLookupKey(name);
-		DataSource dataSource = resolveSpecifiedDataSource(targetDataSource);
-		getResolvedDataSources().put(lookupKey, dataSource);
+			getTargetDataSources().put(name, targetDataSource);
+			
+			// reset resolvedDataSources
+			this.afterPropertiesSet();
+			
+		} finally {
+            lock.unlock();
+        }
 		
 	}
 	
 	/**
-	 * 
-	 * @description	： 为动态数据源设置新的数据源目标源集
-	 * @author 		： 万大龙（743）
-	 * @date 		：2017年10月17日 下午2:34:21
+	 * 为动态数据源设置新的数据源目标源集
+	 * @author 		： <a href="https://github.com/vindell">vindell</a>
 	 * @param properties
-	 * @param HikariProperties
+	 * @param hikariProperties
 	 * @param dsSetting
 	 */
-	public void setTargetDataSource(DataSourceProperties properties, HikaricpProperties HikariProperties,
+	public void setTargetDataSource(DataSourceProperties properties, HikaricpProperties hikariProperties,
 			DynamicDataSourceSetting dsSetting) {
-		this.setTargetDataSource(properties, HikariProperties, HikariProperties.getName(), properties.determineUrl(),
+		this.setTargetDataSource(properties, hikariProperties, hikariProperties.getName(), properties.determineUrl(),
 				properties.determineUsername(), properties.determinePassword());
 	}
 
 	/**
-	 * @description	： 为动态数据源设置新的数据源目标源集合
-	 * @author 		： 万大龙（743）
-	 * @date 		：2017年10月17日 下午2:33:39
+	 * 为动态数据源设置新的数据源目标源集合
+	 * @author 		： <a href="https://github.com/vindell">vindell</a>
 	 * @param targetDataSources
 	 */
 	public void setNewTargetDataSources(Map<Object, Object> targetDataSources) {
-
-		getTargetDataSources().putAll(targetDataSources);
-
-		for (Map.Entry<Object, Object> entry : targetDataSources.entrySet()) {
-			Object lookupKey = resolveSpecifiedLookupKey(entry.getKey());
-			DataSource dataSource = resolveSpecifiedDataSource(entry.getValue());
-			getResolvedDataSources().put(lookupKey, dataSource);
-		}
-
+		
+		lock.lock();
+		
+		try {
+			
+			getTargetDataSources().putAll(targetDataSources);
+			// reset resolvedDataSources
+			this.afterPropertiesSet();
+			
+		} finally {
+	        lock.unlock();
+	    }
 	}
 
 	public void removeTargetDataSource(String name) {
-
-		getTargetDataSources().remove(name);
-		Object lookupKey = resolveSpecifiedLookupKey(name);
-		getResolvedDataSources().remove(lookupKey);
 		
+		lock.lock();
+		
+		try {
+			
+			getTargetDataSources().remove(name);
+			// reset resolvedDataSources
+			this.afterPropertiesSet();
+		
+		} finally {
+	        lock.unlock();
+	    }
 	}
+	
+	@Override
+	public void afterPropertiesSet() {
+		super.afterPropertiesSet();
+		getTargetDataSources().forEach((key, value) -> {
+			Object lookupKey = resolveSpecifiedLookupKey(key);
+			DynamicDataSourceContextHolder.dataSourceKeys.add(lookupKey);
+		});
+	}
+	
 }

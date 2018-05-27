@@ -17,31 +17,19 @@ package com.zaxxer.hikari.spring.boot.ds;
 
 public class DynamicDataSourceSetting {
 
-	/** driverClassName: 连接数据库的驱动名称，如果没有设置Hikari会自动根据数据库连接地址进行匹配 */
-	private String driverClassName;
-	/** name: 数据源名称；配置这个属性的意义在于，如果存在多个数据源，监控的时候可以通过名字来区分开来 */
-	private String name;
+	/** driverClassName: 连接数据库的驱动名称，如果没有设置Druid会自动根据数据库连接地址进行匹配 */
+	protected String driverClassName;
+	/**
+	 * 配置这个属性的意义在于，如果存在多个数据源，监控的时候可以通过名字来区分开来。如果没有配置，将会生成一个名字，格式是：”DataSource-” +
+	 * System.identityHashCode(this)
+	 */
+	protected String name;
 	/** jdbcUrl: 连接数据库的url，不同数据库不一样 */
-	private String url;
+	protected String url;
 	/** username: 连接数据库的用户名 */
-	private String username;
+	protected String username;
 	/** password: 连接数据库的密码 */
-	private String password;
-
-	public DynamicDataSourceSetting(String name, String url, String username, String password) {
-		this.name = name;
-		this.url = url;
-		this.username = username;
-		this.password = password;
-	}
-
-	public DynamicDataSourceSetting(String driverClassName, String name, String url, String username, String password) {
-		this.driverClassName = driverClassName;
-		this.name = name;
-		this.url = url;
-		this.username = username;
-		this.password = password;
-	}
+	protected String password;
 
 	public String getDriverClassName() {
 		return driverClassName;

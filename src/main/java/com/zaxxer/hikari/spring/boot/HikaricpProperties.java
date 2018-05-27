@@ -3,9 +3,14 @@ package com.zaxxer.hikari.spring.boot;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
+
+import com.zaxxer.hikari.spring.boot.ds.DynamicDataSourceSetting;
 
 @ConfigurationProperties(HikaricpProperties.PREFIX)
 public class HikaricpProperties {
@@ -81,6 +86,13 @@ public class HikaricpProperties {
 	/** healthCheckProperties: 连接池监控参数 */
 	private Properties healthCheckProperties = new Properties();
 
+	/** 是否激活动态数据源 */
+	protected boolean dynamic = false;
+	/** 动态数据源连接信息 */
+	@NestedConfigurationProperty
+	protected List<DynamicDataSourceSetting> slaves = new ArrayList<DynamicDataSourceSetting>();
+
+	
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -303,6 +315,22 @@ public class HikaricpProperties {
 
 	public void setHealthCheckProperties(Properties healthCheckProperties) {
 		this.healthCheckProperties = healthCheckProperties;
+	}
+	
+	public boolean isDynamic() {
+		return dynamic;
+	}
+
+	public void setDynamic(boolean dynamic) {
+		this.dynamic = dynamic;
+	}
+
+	public List<DynamicDataSourceSetting> getSlaves() {
+		return slaves;
+	}
+
+	public void setSlaves(List<DynamicDataSourceSetting> slaves) {
+		this.slaves = slaves;
 	}
 
 }

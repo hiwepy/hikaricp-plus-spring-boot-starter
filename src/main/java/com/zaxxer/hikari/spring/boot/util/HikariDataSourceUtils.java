@@ -17,7 +17,7 @@ public class HikariDataSourceUtils {
 		DataSourceProperties tmProperties = new DataSourceProperties();
 		
 		tmProperties.setName(properties.getName());
-		tmProperties.setType(properties.getType());
+		tmProperties.setType(HikariDataSource.class);
 		// driverClassName : 数据库驱动 
 		tmProperties.setDriverClassName(properties.determineDriverClassName());
 		// jdbcUrl: 连接数据库的url
