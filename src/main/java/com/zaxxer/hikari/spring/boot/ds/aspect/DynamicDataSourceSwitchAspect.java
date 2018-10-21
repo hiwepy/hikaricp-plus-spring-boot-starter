@@ -20,9 +20,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.biz.jdbc.DataSourceRoutingKeyHolder;
 import org.springframework.stereotype.Component;
 
-import com.zaxxer.hikari.spring.boot.ds.DynamicDataSourceContextHolder;
 import com.zaxxer.hikari.spring.boot.ds.annotation.SwitchRepository;
 
 /**
@@ -38,15 +38,15 @@ public class DynamicDataSourceSwitchAspect {
 	//环绕通知   
 	@Around("@annotation(com.zaxxer.hikari.spring.boot.ds.annotation.SwitchRepository) and @annotation(repository)")
 	public Object around(ProceedingJoinPoint joinPoint, SwitchRepository repository) throws Throwable {
-		String oldRepository = DynamicDataSourceContextHolder.getDataSourceKey();
+		String oldRepository = DataSourceRoutingKeyHolder.getDataSourceKey();
     	try {
-    		DynamicDataSourceContextHolder.setDataSourceKey(repository.value());
+    		DataSourceRoutingKeyHolder.setDataSourceKey(repository.value());
     		return joinPoint.proceed();
         } finally {
         	if (logger.isDebugEnabled()) {
         		logger.debug("invoke(ProceedingJoinPoint) - end"); //$NON-NLS-1$
             }
-    		DynamicDataSourceContextHolder.setDataSourceKey(oldRepository);
+    		DataSourceRoutingKeyHolder.setDataSourceKey(oldRepository);
         }
     }  
 	

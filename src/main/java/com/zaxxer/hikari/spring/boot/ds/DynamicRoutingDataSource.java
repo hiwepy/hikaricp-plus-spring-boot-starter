@@ -24,6 +24,7 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.biz.jdbc.DataSourceRoutingKeyHolder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.util.ReflectionUtils;
@@ -47,8 +48,8 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 	
 	@Override
 	protected Object determineCurrentLookupKey() {
-		 logger.info("Current DataSource is [{}]", DynamicDataSourceContextHolder.getDataSourceKey());
-		return DynamicDataSourceContextHolder.getDataSourceKey();
+		 logger.info("Current DataSource is [{}]", DataSourceRoutingKeyHolder.getDataSourceKey());
+		return DataSourceRoutingKeyHolder.getDataSourceKey();
 	}
 	
 	public Map<Object, Object> getTargetDataSources() {
@@ -139,7 +140,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 		super.afterPropertiesSet();
 		getTargetDataSources().forEach((key, value) -> {
 			Object lookupKey = resolveSpecifiedLookupKey(key);
-			DynamicDataSourceContextHolder.dataSourceKeys.add(lookupKey);
+			DataSourceRoutingKeyHolder.dataSourceKeys.add(lookupKey);
 		});
 	}
 	
