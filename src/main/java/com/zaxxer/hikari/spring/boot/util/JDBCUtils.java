@@ -13,9 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.zaxxer.hikari.spring.boot.ds;
+package com.zaxxer.hikari.spring.boot.util;
 
 import java.sql.DriverManager;
+
+import com.zaxxer.hikari.spring.boot.ds.DatabaseType;
 
 public class JDBCUtils {
 
@@ -31,8 +33,8 @@ public class JDBCUtils {
 	
 	
 	public static String getDriverClass(String dbtype) {
-		JDBCDriverEnum driverEnum = JDBCDriverEnum.driver(dbtype);
-		return driverEnum != null ? driverEnum.getDriverClass() : null; 
+		DatabaseType dbType = DatabaseType.valueOfIgnoreCase(dbtype);
+		return dbType != null ? dbType.getDriverClass() : null; 
 	}
 	
 }
