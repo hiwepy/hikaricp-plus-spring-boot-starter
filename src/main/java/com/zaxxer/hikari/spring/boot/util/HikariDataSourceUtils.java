@@ -7,25 +7,24 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.util.CollectionUtils;
 
 import com.zaxxer.hikari.HikariDataSource;
-import com.zaxxer.hikari.spring.boot.HikaricpProperties;
+import com.zaxxer.hikari.spring.boot.ds.HikaricpDataSourceProperties;
 
 public class HikariDataSourceUtils {
 
-	public static <T extends DataSource> HikariDataSource createDataSource(DataSourceProperties properties, HikaricpProperties hikariProperties, 
-			String jdbcUrl, String username, String password) {
+	public static <T extends DataSource> HikariDataSource createDataSource(HikaricpDataSourceProperties hikariProperties) {
 		
 		DataSourceProperties tmProperties = new DataSourceProperties();
 		
-		tmProperties.setName(properties.getName());
-		tmProperties.setType(properties.getType());
+		tmProperties.setName(hikariProperties.getName());
+		tmProperties.setType(com.zaxxer.hikari.HikariDataSource.class);
 		// driverClassName : 数据库驱动 
-		tmProperties.setDriverClassName(properties.determineDriverClassName());
+		tmProperties.setDriverClassName(hikariProperties.getDriverClassName());
 		// jdbcUrl: 连接数据库的url
-		tmProperties.setUrl(jdbcUrl);
+		tmProperties.setUrl(hikariProperties.getJdbcUrl());
 		// username: 连接数据库的用户名
-		tmProperties.setUsername(username);
+		tmProperties.setUsername(hikariProperties.getUsername());
 		// password: 连接数据库的密码
-		tmProperties.setPassword(password);
+		tmProperties.setPassword(hikariProperties.getPassword());
 		
 		// 创建 HikariDataSource 数据源对象
 		HikariDataSource dataSource = createDataSource(tmProperties, tmProperties.getType());

@@ -30,7 +30,6 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.util.ReflectionUtils;
 
 import com.zaxxer.hikari.HikariDataSource;
-import com.zaxxer.hikari.spring.boot.HikaricpProperties;
 import com.zaxxer.hikari.spring.boot.util.HikariDataSourceUtils;
 
 @SuppressWarnings("unchecked")
@@ -66,15 +65,28 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 		return (Map<Object, DataSource>) resolvedDataSources;
 	}
 	
-	public void setTargetDataSource(DataSourceProperties properties, HikaricpProperties HikariProperties,
-			String name, String url, String username, String password) {
+	public void setTargetDataSource(String name, DataSourceProperties basicProperties, HikaricpDataSourceProperties hikariProperties) {
 
 		lock.lock();
 		
 		try {
 			
+			//if not found prefix 'spring.datasource.hikari' jdbc properties ,'spring.datasource' prefix jdbc properties will be used.
+	        if (hikariProperties.getUsername() == null) {
+	        	hikariProperties.setUsername(basicProperties.determineUsername());
+	        }
+	        if (hikariProperties.getPassword() == null) {
+	        	hikariProperties.setPassword(basicProperties.determinePassword());
+	        }
+	        if (hikariProperties.getJdbcUrl() == null) {
+	        	hikariProperties.setJdbcUrl(basicProperties.determineUrl());
+	        }
+	        if(hikariProperties.getDriverClassName() == null){
+	        	hikariProperties.setDriverClassName(basicProperties.determineDriverClassName());
+	        }
+			
 			// 动态创建Hikari数据源
-			HikariDataSource targetDataSource = HikariDataSourceUtils.createDataSource(properties, HikariProperties, url, username, password);
+			HikariDataSource targetDataSource = HikariDataSourceUtils.createDataSource(hikariProperties);
 
 			getTargetDataSources().put(name, targetDataSource);
 			
@@ -87,24 +99,11 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 		
 	}
 	
-	/**
-	 * 为动态数据源设置新的数据源目标源集
-	 * @author 		： <a href="https://github.com/vindell">vindell</a>
-	 * @param properties
-	 * @param hikariProperties
-	 * @param dsSetting
-	 */
-	public void setTargetDataSource(DataSourceProperties properties, HikaricpProperties hikariProperties,
+	public void setTargetDataSource(DataSourceProperties properties, HikaricpDataSourceProperties hikariProperties,
 			DynamicDataSourceSetting dsSetting) {
-		this.setTargetDataSource(properties, hikariProperties, hikariProperties.getName(), properties.determineUrl(),
-				properties.determineUsername(), properties.determinePassword());
+		this.setTargetDataSource(hikariProperties.getName(), properties, hikariProperties);
 	}
 
-	/**
-	 * 为动态数据源设置新的数据源目标源集合
-	 * @author 		： <a href="https://github.com/vindell">vindell</a>
-	 * @param targetDataSources
-	 */
 	public void setNewTargetDataSources(Map<Object, Object> targetDataSources) {
 		
 		lock.lock();

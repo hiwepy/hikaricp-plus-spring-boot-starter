@@ -15,7 +15,6 @@ spring:
     url: jdbc:mysql://IP:3306/dbName?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=UTF-8
     username: xxx
     password: xxx
-    type: com.alibaba.druid.pool.DruidDataSource
     # HiKariCP的数据源配置：
     hikari: 
       allow-pool-suspension: true
@@ -38,9 +37,6 @@ spring:
       max-pool-size: 15 
       # 最小闲置线程
       min-idle: 5
-      dynamic: true
       # 生效超时
       validation-timeout: 30000
- 
-    
-        
+      
