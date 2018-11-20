@@ -99,8 +99,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 		
 	}
 	
-	public void setTargetDataSource(DataSourceProperties properties, HikaricpDataSourceProperties hikariProperties,
-			DynamicDataSourceSetting dsSetting) {
+	public void setTargetDataSource(DataSourceProperties properties, HikaricpDataSourceProperties hikariProperties) {
 		this.setTargetDataSource(hikariProperties.getName(), properties, hikariProperties);
 	}
 

@@ -44,26 +44,32 @@ public class HikaricpAutoConfiguration {
 	@Primary
 	public DataSource dataSource(DataSourceProperties basicProperties, HikaricpProperties hikariProperties) {
 		
-		Map<Object, Object> targetDataSources = new HashMap<Object, Object>();
-		
-		//基于配置文件的动态数据源信息
-		if (!CollectionUtils.isEmpty(hikariProperties.getSlaves())) {
-			for (HikaricpDataSourceProperties slaveProperties : hikariProperties.getSlaves()) {
-				// 动态创建Hikari数据源
-				HikariDataSource slaveDataSource = HikariDataSourceUtils.createDataSource(configureProperties(basicProperties, hikariProperties));
-				targetDataSources.put(slaveProperties.getName(), slaveDataSource);
+		// 动态数据源
+		if(hikariProperties.isRoutable()) {
+			
+			Map<Object, Object> targetDataSources = new HashMap<Object, Object>();
+			
+			//基于配置文件的动态数据源信息
+			if (!CollectionUtils.isEmpty(hikariProperties.getSlaves())) {
+				for (HikaricpDataSourceProperties slaveProperties : hikariProperties.getSlaves()) {
+					// 动态创建Hikari数据源
+					HikariDataSource slaveDataSource = HikariDataSourceUtils.createDataSource(configureProperties(basicProperties, hikariProperties));
+					targetDataSources.put(slaveProperties.getName(), slaveDataSource);
+				}
 			}
+			
+			// 动态数据源支持
+			DynamicRoutingDataSource dataSource = new DynamicRoutingDataSource();
+			dataSource.setTargetDataSources(targetDataSources);// 该方法是AbstractRoutingDataSource的方法
+			
+			// 默认的数据源
+			HikariDataSource masterDataSource = HikariDataSourceUtils.createDataSource(configureProperties(basicProperties, hikariProperties));
+			dataSource.setDefaultTargetDataSource(masterDataSource);// 默认的datasource设置为myTestDbDataSource
+				
+			return dataSource;
 		}
 		
-		// 动态数据源支持
-		DynamicRoutingDataSource dataSource = new DynamicRoutingDataSource();
-		dataSource.setTargetDataSources(targetDataSources);// 该方法是AbstractRoutingDataSource的方法
-		
-		// 默认的数据源
-		HikariDataSource masterDataSource = HikariDataSourceUtils.createDataSource(configureProperties(basicProperties, hikariProperties));
-		dataSource.setDefaultTargetDataSource(masterDataSource);// 默认的datasource设置为myTestDbDataSource
-			
-		return dataSource;
+		return HikariDataSourceUtils.createDataSource(configureProperties(basicProperties, hikariProperties));
 			
 	}
 	

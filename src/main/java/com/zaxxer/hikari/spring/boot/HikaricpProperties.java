@@ -16,7 +16,13 @@ public class HikaricpProperties extends HikaricpDataSourceProperties {
 	 * Enable Hikari.
 	 */
 	private boolean enabled = false;
-	/** 动态数据源连接信息 */
+	/**
+	 * Enable Dynamic Routing.
+	 */
+	private boolean routable = false;
+	/** 
+	 * Datasource slaves 
+	 */
 	private List<HikaricpDataSourceProperties> slaves = new ArrayList<HikaricpDataSourceProperties>();
 
 	public boolean isEnabled() {
@@ -25,6 +31,14 @@ public class HikaricpProperties extends HikaricpDataSourceProperties {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	public boolean isRoutable() {
+		return routable;
+	}
+
+	public void setRoutable(boolean routable) {
+		this.routable = routable;
 	}
 
 	public List<HikaricpDataSourceProperties> getSlaves() {
