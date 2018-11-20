@@ -28,6 +28,18 @@ public class HikariDataSourceUtils {
 		
 		// 创建 HikariDataSource 数据源对象
 		HikariDataSource dataSource = createDataSource(tmProperties, tmProperties.getType());
+		// 配置 Hikari数据源
+		configureProperties(hikariProperties, dataSource);
+		
+		return dataSource;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> T createDataSource(DataSourceProperties properties, Class<? extends DataSource> type) {
+		return (T) properties.initializeDataSourceBuilder().type(type).build();
+	}
+	
+	public static void configureProperties(HikaricpDataSourceProperties hikariProperties, HikariDataSource dataSource) {
 
 		// Hikari 连接池参数
 		
@@ -88,12 +100,6 @@ public class HikariDataSourceUtils {
 			dataSource.setHealthCheckProperties(hikariProperties.getHealthCheckProperties());
 		}
 		
-		return dataSource;
-	}
-
-	@SuppressWarnings("unchecked")
-	public static <T> T createDataSource(DataSourceProperties properties, Class<? extends DataSource> type) {
-		return (T) properties.initializeDataSourceBuilder().type(type).build();
 	}
 	
 }
