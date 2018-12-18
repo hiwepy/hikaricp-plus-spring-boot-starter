@@ -15,11 +15,16 @@
  */
 package com.zaxxer.hikari.spring.boot.ds;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 关系型数据库 - 驱动和连接示例
@@ -96,8 +101,8 @@ public enum DatabaseType {
 	 * jdbc:sqlserver://[host-name]:[port];databaseName=[database-name]
 	 */
 	MSSQL("sqlserver", "Microsoft SQL Server", "com.microsoft.sqlserver.jdbc.SQLServerDriver",
-			"jdbc:sqlserver://[host-name]:[port];databaseName=[database-name]",
-			"jdbc:sqlserver://%s:%d;databaseName=%s", 1433, true),
+			"jdbc:sqlserver://[host-name]:[port];DatabaseName=[database-name]",
+			"jdbc:sqlserver://%s:%d;DatabaseName=%s", 1433, true),
 	/**
 	 * MySQL #
 	 * jdbc:mysql://[host-name]:[port]/[database-name]?rewriteBatchedStatements=true&amp;useUnicode=true&amp;characterEncoding=UTF-8
@@ -206,6 +211,19 @@ public enum DatabaseType {
 		return String.format(url, ip, port, dbname);
 	}
 
+	public String getDriverURL(String ip, int port, String dbname, Map<String,String> properties, String separator) {
+		if(properties != null && !properties.isEmpty()) {
+			Iterator<Entry<String, String>> ite = properties.entrySet().iterator();
+			List<String> args = new ArrayList<>();
+			while (ite.hasNext()) {
+				Entry<String, String> entry = ite.next();
+				args.add(entry.getKey() + "=" + entry.getValue());
+			}
+			return String.format(url, ip, port, dbname) + separator + StringUtils.join(args, separator);
+		}
+		return String.format(url, ip, port, dbname);
+	}
+	
 	public Map<String, String> toMap() {
 		Map<String, String> driverMap = new HashMap<String, String>();
 		driverMap.put("key", this.getKey());
