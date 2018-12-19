@@ -106,7 +106,7 @@ public enum DatabaseType {
 			"jdbc:microsoft:sqlserver://[host-name]:[port];DatabaseName=[database-name]",
 			"jdbc:microsoft:sqlserver://%s:%d;DatabaseName=%s;integratedSecurity=false;", 1433, true),
 	/**
-	 * Microsoft SQL Server 2005 #
+	 * Microsoft SQL Server 2005 + #
 	 * jdbc:sqlserver://[host-name]:[port];DatabaseName=[database-name]
 	 */
 	MSSQL("sqlserver", "Microsoft SQL Server 2005及以上版本", "com.microsoft.sqlserver.jdbc.SQLServerDriver",
@@ -125,10 +125,16 @@ public enum DatabaseType {
 	ORACLE("oracle", "Oracle 10g、11g", "oracle.jdbc.OracleDriver",
 			"jdbc:oracle:thin:@[host-name]:[port]:[database-name]", "jdbc:oracle:thin:@%s:%d:%s", 1521, true),
 	/**
-	 * Oracle 12c # jdbc:oracle:thin:@[host-name]:[port]/[database-name]
+	 * Oracle 12c # jdbc:oracle:thin:@//[host-name]:[port]/[database-name]
 	 */
-	ORACLE12C("oracle-12c", "Oracle 12c", "oracle.jdbc.OracleDriver",
-			"jdbc:oracle:thin:@[host-name]:[port]/[database-name]", "jdbc:oracle:thin:@%s:%d/%s", 1521, true),
+	ORACLE_12C("oracle-12c", "Oracle 12c", "oracle.jdbc.OracleDriver",
+			"jdbc:oracle:thin:@//[host-name]:[port]/[database-name]", "jdbc:oracle:thin:@//%s:%d/%s", 1521, true),
+	/**
+	 * Oracle 18c # jdbc:oracle:thin:@//[host-name]:[port]/[database-name]
+	 */
+	ORACLE_18C("oracle-18c", "Oracle 12c", "oracle.jdbc.OracleDriver",
+			"jdbc:oracle:thin:@//[host-name]:[port]/[database-name]", "jdbc:oracle:thin:@//%s:%d/%s", 1521, true),
+	
 	/**
 	 * PostgreSQL # jdbc:postgresql://[host-name]:[port]/[database-name]
 	 */
