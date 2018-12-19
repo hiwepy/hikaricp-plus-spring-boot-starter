@@ -97,12 +97,21 @@ public enum DatabaseType {
 	MARIADB("mariadb", "Mariadb", "org.mariadb.jdbc.Driver", 
 			"jdbc:mariadb://[host-name]:[port]/[database-name]", "jdbc:mariadb://%s:%d/%s", 3306, true),
 	/**
-	 * Microsoft SQL Server #
-	 * jdbc:sqlserver://[host-name]:[port];databaseName=[database-name]
+	 * Microsoft SQL Server 2000 #
+	 * jdbc:microsoft:sqlserver://[host-name]:[port];DatabaseName=[database-name]
+	 * https://docs.microsoft.com/zh-cn/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server-support-matrix?view=sql-server-2017
+	 * 
 	 */
-	MSSQL("sqlserver", "Microsoft SQL Server", "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+	MSSQL_2000("sqlserver2000", "Microsoft SQL Server 2000", "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+			"jdbc:microsoft:sqlserver://[host-name]:[port];DatabaseName=[database-name]",
+			"jdbc:microsoft:sqlserver://%s:%d;DatabaseName=%s;integratedSecurity=false;", 1433, true),
+	/**
+	 * Microsoft SQL Server 2005 #
+	 * jdbc:sqlserver://[host-name]:[port];DatabaseName=[database-name]
+	 */
+	MSSQL("sqlserver", "Microsoft SQL Server 2005及以上版本", "com.microsoft.sqlserver.jdbc.SQLServerDriver",
 			"jdbc:sqlserver://[host-name]:[port];DatabaseName=[database-name]",
-			"jdbc:sqlserver://%s:%d;DatabaseName=%s", 1433, true),
+			"jdbc:sqlserver://%s:%d;DatabaseName=%s;integratedSecurity=false;", 1433, true),
 	/**
 	 * MySQL #
 	 * jdbc:mysql://[host-name]:[port]/[database-name]?rewriteBatchedStatements=true&amp;useUnicode=true&amp;characterEncoding=UTF-8
