@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.0.RELEASE</version>
+		<version>2.1.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	
@@ -447,61 +447,6 @@
 		    <artifactId>micrometer-core</artifactId>
 		    <scope>provided</scope>
 		</dependency>
-		<dependency>
-             <groupId>io.micrometer</groupId>
-             <artifactId>micrometer-registry-atlas</artifactId>
-             <scope>provided</scope>
-         </dependency>
-         <dependency>
-             <groupId>io.micrometer</groupId>
-             <artifactId>micrometer-registry-datadog</artifactId>
-             <scope>provided</scope>
-         </dependency>
-         <dependency>
-             <groupId>io.micrometer</groupId>
-             <artifactId>micrometer-registry-influx</artifactId>
-             <scope>provided</scope>
-         </dependency>
-         <dependency>
-             <groupId>io.micrometer</groupId>
-             <artifactId>micrometer-registry-ganglia</artifactId>
-             <scope>provided</scope>
-         </dependency>
-         <dependency>
-             <groupId>io.micrometer</groupId>
-             <artifactId>micrometer-registry-graphite</artifactId>
-             <scope>provided</scope>
-         </dependency>
-         <dependency>
-             <groupId>io.micrometer</groupId>
-             <artifactId>micrometer-registry-jmx</artifactId>
-             <scope>provided</scope>
-         </dependency>
-         <dependency>
-             <groupId>io.micrometer</groupId>
-             <artifactId>micrometer-registry-new-relic</artifactId>
-             <scope>provided</scope>
-         </dependency>
-         <dependency>
-             <groupId>io.micrometer</groupId>
-             <artifactId>micrometer-registry-prometheus</artifactId>
-             <scope>provided</scope>
-         </dependency>
-         <dependency>
-             <groupId>io.micrometer</groupId>
-             <artifactId>micrometer-registry-signalfx</artifactId>
-             <scope>provided</scope>
-         </dependency>
-         <dependency>
-             <groupId>io.micrometer</groupId>
-             <artifactId>micrometer-registry-statsd</artifactId>
-             <scope>provided</scope>
-         </dependency>
-         <dependency>
-             <groupId>io.micrometer</groupId>
-             <artifactId>micrometer-registry-wavefront</artifactId>
-             <scope>provided</scope>
-         </dependency>
 		
 		<!-- https://mvnrepository.com/artifact/io.prometheus/sampleclient -->
 		<dependency>
