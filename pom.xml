@@ -13,7 +13,7 @@
 	<groupId>com.github.vindell</groupId>
 	<artifactId>spring-boot-starter-hikaricp-plus</artifactId>
 	<description>Spring Boot Starter For HikariCP</description>
-	<version>1.0.5-SNAPSHOT</version>
+	<version>1.0.5.RELEASE</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<url>https://github.com/vindell/${project.artifactId}</url>
 	<packaging>jar</packaging>
@@ -372,7 +372,7 @@
         <maven-surefire-plugin.vertsion>2.21.0</maven-surefire-plugin.vertsion>
 		<maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
 		<prometheus.version>0.2.0</prometheus.version>
-		<spring-biz.version>1.0.1.RELEASE</spring-biz.version>  
+		<spring-biz.version>1.0.6.RELEASE</spring-biz.version>  
 	</properties>
 	
 	<dependencies>
