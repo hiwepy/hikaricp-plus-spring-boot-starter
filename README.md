@@ -1,5 +1,6 @@
-# spring-boot-starter-hikaricp-plus
+# hikaricp-plus-spring-boot-starter
 
+Spring Boot Starter For HikariCP
 
 ### 说明
 
@@ -16,7 +17,7 @@
 ``` xml
 <dependency>
 	<groupId>com.github.vindell</groupId>
-	<artifactId>spring-boot-starter-hikaricp-plus</artifactId>
+	<artifactId>hikaricp-plus-spring-boot-starter</artifactId>
 	<version>${project.version}</version>
 </dependency>
 ```
