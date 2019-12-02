@@ -9,6 +9,13 @@ server:
     key-password: qq123456
     key-alias: tomcat
   port: 8080
+
+sharding:
+  jdbc:
+    datasource:
+      names: ddd
+             
+
 spring:  
   datasource: 
     driver-class-name: com.mysql.jdbc.Driver
