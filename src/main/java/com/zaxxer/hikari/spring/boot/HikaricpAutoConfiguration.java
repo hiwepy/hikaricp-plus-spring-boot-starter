@@ -21,7 +21,7 @@ import com.zaxxer.hikari.spring.boot.ds.HikaricpDataSourceProperties;
 import com.zaxxer.hikari.spring.boot.util.HikariDataSourceUtils;
 
 /**
- * @author 		： <a href="https://github.com/vindell">vindell</a>
+ * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
  */
 @Configuration
 @ConditionalOnClass(com.zaxxer.hikari.HikariDataSource.class)
@@ -35,7 +35,7 @@ public class HikaricpAutoConfiguration {
 	
 	/**
 	 * 配置HikariDataSource
-	 * @author 		： <a href="https://github.com/vindell">vindell</a>
+	 * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
 	 * @param basicProperties {@link DataSourceProperties} 参数对象
 	 * @param hikariProperties {@link HikaricpProperties} 参数对象
 	 * @return {@link HikariDataSource} 数据源

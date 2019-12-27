@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, vindell (https://github.com/vindell).
+ * Copyright (c) 2017, hiwepy (https://github.com/hiwepy).
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -26,7 +26,7 @@ import org.springframework.biz.jdbc.DataSourceRoutingKeyHolder;
 
 /**
  * 用于方法注释；是否切换数据源及切换的数据源名称
- * @author 		： <a href="https://github.com/vindell">vindell</a>
+ * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

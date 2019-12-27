@@ -10,12 +10,12 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	
-	<groupId>com.github.vindell</groupId>
+	<groupId>com.github.hiwepy</groupId>
 	<artifactId>hikaricp-plus-spring-boot-starter</artifactId>
 	<description>Spring Boot Starter For HikariCP</description>
 	<version>1.0.6-SNAPSHOT</version>
 	<name>${project.groupId}:${project.artifactId}</name>
-	<url>https://github.com/vindell/${project.artifactId}</url>
+	<url>https://github.com/hiwepy/${project.artifactId}</url>
 	<packaging>jar</packaging>
 
 	<licenses>
@@ -26,15 +26,15 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:https:github.com/vindell/${project.artifactId}.git</connection>
-		<developerConnection>scm:git:https:github.com/vindell/${project.artifactId}.git</developerConnection>
-		<url>https:github.com/vindell/${project.artifactId}</url>
+		<connection>scm:git:https:github.com/hiwepy/${project.artifactId}.git</connection>
+		<developerConnection>scm:git:https:github.com/hiwepy/${project.artifactId}.git</developerConnection>
+		<url>https:github.com/hiwepy/${project.artifactId}</url>
 		<tag>${project.artifactId}</tag>
 	</scm>
 
 	<developers>
 		<developer>
-			<name>vindell</name>
+			<name>wandl</name>
 			<email>hnxyhcwdl1003@163.com</email>
 			<roles>
 				<role>developer</role>
@@ -372,7 +372,7 @@
         <maven-surefire-plugin.vertsion>2.21.0</maven-surefire-plugin.vertsion>
 		<maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
 		<prometheus.version>0.2.0</prometheus.version>
-		<spring-biz.version>1.0.6.RELEASE</spring-biz.version>  
+		<spring-biz.version>1.0.8-SNAPSHOT</spring-biz.version>
 		<sharding-jdbc.version>3.1.0</sharding-jdbc.version>
 		<sharding-transaction.version>3.0.0.M3</sharding-transaction.version>
 		<spring-boot-starter-sharding-jdbc.version>${sharding-jdbc.version}</spring-boot-starter-sharding-jdbc.version>
@@ -398,9 +398,9 @@
 			    <artifactId>sharding-jdbc-orchestration-spring-boot-starter</artifactId>
 			    <version>${spring-boot-starter-sharding-jdbc.version}</version>
 			</dependency>
-			<!-- https://mvnrepository.com/artifact/com.github.vindell/spring-biz -->
+			<!-- https://mvnrepository.com/artifact/com.github.hiwepy/spring-biz -->
 			<dependency>
-			    <groupId>com.github.vindell</groupId>
+			    <groupId>com.github.hiwepy</groupId>
 			    <artifactId>spring-biz</artifactId>
 			    <version>${spring-biz.version}</version>
 			</dependency>
@@ -513,7 +513,7 @@
 			<artifactId>spring-aspects</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.github.vindell</groupId>
+			<groupId>com.github.hiwepy</groupId>
 			<artifactId>spring-biz</artifactId>
 		</dependency>
 
