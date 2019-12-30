@@ -16,7 +16,7 @@ Spring Boot Starter For HikariCP
 
 ``` xml
 <dependency>
-	<groupId>com.github.vindell</groupId>
+	<groupId>com.github.hiwepy</groupId>
 	<artifactId>hikaricp-plus-spring-boot-starter</artifactId>
 	<version>${project.version}</version>
 </dependency>
