@@ -369,7 +369,7 @@
         <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
-        <maven-surefire-plugin.vertsion>2.21.0</maven-surefire-plugin.vertsion>
+        <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
 		<maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
 		<prometheus.version>0.2.0</prometheus.version>
 		<spring-biz.version>1.0.8-SNAPSHOT</spring-biz.version>
