@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnClass({ com.zaxxer.hikari.HikariDataSource.class,
-		io.shardingsphere.shardingjdbc.api.MasterSlaveDataSourceFactory.class })
+	org.apache.shardingsphere.shardingjdbc.api.MasterSlaveDataSourceFactory.class })
 @ConditionalOnProperty(prefix = HikaricpProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({ HikaricpProperties.class, DataSourceProperties.class })
 @AutoConfigureBefore(name = {
