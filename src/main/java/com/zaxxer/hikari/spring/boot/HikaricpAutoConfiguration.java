@@ -53,7 +53,7 @@ public class HikaricpAutoConfiguration {
 			if (!CollectionUtils.isEmpty(hikariProperties.getSlaves())) {
 				for (HikaricpDataSourceProperties slaveProperties : hikariProperties.getSlaves()) {
 					// 动态创建Hikari数据源
-					HikariDataSource slaveDataSource = HikariDataSourceUtils.createDataSource(configureProperties(basicProperties, hikariProperties));
+					HikariDataSource slaveDataSource = HikariDataSourceUtils.createDataSource(configureProperties(basicProperties, slaveProperties));
 					targetDataSources.put(slaveProperties.getName(), slaveDataSource);
 				}
 			}
