@@ -371,9 +371,8 @@
         <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
         <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
 		<maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
-		<prometheus.version>0.2.0</prometheus.version>
-		<spring-biz.version>1.0.8-SNAPSHOT</spring-biz.version>
-		<sharding-jdbc.version>4.1.0</sharding-jdbc.version>
+		<prometheus.version>0.10.0</prometheus.version>
+		<spring-biz.version>1.1.1.RELEASE</spring-biz.version>
 	</properties>
 	
 	<dependencyManagement>
@@ -389,17 +388,6 @@
 			    <groupId>io.prometheus</groupId>
 			    <artifactId>simpleclient</artifactId>
 			    <version>${prometheus.version}</version>
-			</dependency>
-			<!-- https://mvnrepository.com/artifact/org.apache.shardingsphere -->
-			<dependency>
-				<groupId>org.apache.shardingsphere</groupId>
-				<artifactId>sharding-jdbc-core</artifactId>
-				<version>${sharding-jdbc.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.shardingsphere</groupId>
-				<artifactId>sharding-transaction-spring</artifactId>
-				<version>${sharding-transaction.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -487,11 +475,6 @@
 		<dependency>
 			<groupId>io.dropwizard.metrics</groupId>
 			<artifactId>metrics-core</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.shardingsphere</groupId>
-			<artifactId>sharding-jdbc-core</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		

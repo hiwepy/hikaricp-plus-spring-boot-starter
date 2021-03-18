@@ -1,7 +1,6 @@
 package com.zaxxer.hikari.spring.boot;
 
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -11,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
  * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
  */
 @Configuration
-@ConditionalOnClass({ com.zaxxer.hikari.HikariDataSource.class,
-	org.apache.shardingsphere.shardingjdbc.api.MasterSlaveDataSourceFactory.class })
+/*@ConditionalOnClass({ com.zaxxer.hikari.HikariDataSource.class,
+	org.apache.shardingsphere.shardingjdbc.api.MasterSlaveDataSourceFactory.class })*/
 @ConditionalOnProperty(prefix = HikaricpProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({ HikaricpProperties.class, DataSourceProperties.class })
 @AutoConfigureBefore(name = {
