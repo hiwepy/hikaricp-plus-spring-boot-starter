@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author 		： <a href="https://github.com/easy-4-java">hiwepy</a>
  */
 @Configuration
 @ConditionalOnProperty(prefix = HikaricpProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
@@ -20,7 +20,7 @@ public class HikaricpShardingJdbcAutoConfiguration {
 	
 	/**
 	 * 配置HikariDataSource
-	 * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+	 * @author 		： <a href="https://github.com/easy-4-java">hiwepy</a>
 	 * @param basicProperties {@link DataSourceProperties} 参数对象
 	 * @param hikariProperties {@link HikaricpProperties} 参数对象
 	 * @return {@link HikariDataSource} 数据源
