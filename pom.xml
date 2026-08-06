@@ -438,6 +438,10 @@
         <commons-lang3.version>3.18.0</commons-lang3.version>
         <prometheus.version>0.16.0</prometheus.version>
         <spring-biz.version>3.3.x.20241020.RELEASE</spring-biz.version>
+                <commons-io.version>2.22.0</commons-io.version>
+                <dropwizard-metrics.version>4.2.39</dropwizard-metrics.version>
+                <prometheus-metrics-core.version>1.3.6</prometheus-metrics-core.version>
+                <slf4j.version>2.0.18</slf4j.version>
     </properties>
 
     <dependencyManagement>
@@ -457,7 +461,30 @@
                 <artifactId>metrics-core</artifactId>
                 <version>4.2.33</version>
             </dependency>
-        </dependencies>
+                <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>prometheus-metrics-core</artifactId>
+            <version>${prometheus-metrics-core.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+            <scope>test</scope>
+        </dependency>
+</dependencies>
     </dependencyManagement>
 
     <dependencies>
@@ -466,14 +493,14 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.13</version>
+            <version>${slf4j.version}</version>
         </dependency>
         
         <!-- For Slf4j Simple -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>2.0.13</version>
+            <version>${slf4j.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -547,7 +574,7 @@
         <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>prometheus-metrics-core</artifactId>
-            <version>1.3.6</version>
+            <version>${prometheus-metrics-core.version}</version>
             <scope>provided</scope>
         </dependency>
         
@@ -555,7 +582,7 @@
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-core</artifactId>
-            <version>4.2.30</version>
+            <version>${dropwizard-metrics.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -585,7 +612,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.11.0</version>
+            <version>${commons-io.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
