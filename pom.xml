@@ -12,7 +12,7 @@
     <groupId>io.github.easy4j</groupId>
     <artifactId>hikaricp-plus-spring-boot-starter</artifactId>
     <description>Spring Boot Starter For HikariCP</description>
-    <version>3.2.x.20260527-SNAPSHOT</version>
+    <version>3.2.x.20260630-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
     <packaging>jar</packaging>
@@ -437,7 +437,7 @@
         
         <commons-lang3.version>3.18.0</commons-lang3.version>
         <prometheus.version>0.16.0</prometheus.version>
-        <spring-biz.version>3.3.x.20241020.RELEASE</spring-biz.version>
+        <spring-biz.version>2.0.x.20260630-SNAPSHOT</spring-biz.version>
                 <commons-io.version>2.22.0</commons-io.version>
                 <dropwizard-metrics.version>4.2.39</dropwizard-metrics.version>
                 <prometheus-metrics-core.version>1.3.6</prometheus-metrics-core.version>
