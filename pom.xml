@@ -447,10 +447,10 @@
 
         <dependencies>
             
-            <!-- Source: https://github.com/easy-4-java/spring-biz — easy4j spring-biz -->
+            <!-- Source: https://github.com/easy-4-java/spring-enhance — easy4j spring-biz -->
             <dependency>
                 <groupId>io.github.easy4j</groupId>
-                <artifactId>spring-biz</artifactId>
+                <artifactId>spring-enhance</artifactId>
                 <version>${spring-biz.version}</version>
             </dependency>
             
@@ -588,10 +588,10 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
         </dependency>
-        <!-- Source: https://github.com/easy-4-java/spring-biz — easy4j spring-biz -->
+        <!-- Source: https://github.com/easy-4-java/spring-enhance — easy4j spring-biz -->
         <dependency>
             <groupId>io.github.easy4j</groupId>
-            <artifactId>spring-biz</artifactId>
+            <artifactId>spring-enhance</artifactId>
         </dependency>
 
             <!-- For JUnit Jupiter -->
