@@ -28,7 +28,7 @@ import io.micrometer.core.instrument.util.HierarchicalNameMapper;
 
 /**
  * 基于Micrometer监控组件的HikariDataSource监控
- * @author 		： <a href="https://github.com/easy-4-java">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )
