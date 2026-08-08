@@ -7,22 +7,20 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 @Configuration
-/*@ConditionalOnClass({ com.zaxxer.hikari.HikariDataSource.class,
-	org.apache.shardingsphere.shardingjdbc.api.MasterSlaveDataSourceFactory.class })*/
 @ConditionalOnProperty(prefix = HikaricpProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({ HikaricpProperties.class, DataSourceProperties.class })
 @AutoConfigureBefore(name = {
 	"org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration",
-	"com.baomidou.mybatisplus.spring.boot.starter.MybatisPlusAutoConfiguration"
+	"com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration"
 })
 public class HikaricpShardingJdbcAutoConfiguration {
 	
 	/**
 	 * 配置HikariDataSource
-	 * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+	 * @author [@Loong Wan](https://github.com/loong10k)
 	 * @param basicProperties {@link DataSourceProperties} 参数对象
 	 * @param hikariProperties {@link HikaricpProperties} 参数对象
 	 * @return {@link HikariDataSource} 数据源
