@@ -2,7 +2,7 @@ package com.zaxxer.hikari.spring.boot;
 
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty(prefix = HikaricpProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({ HikaricpProperties.class, DataSourceProperties.class })
 @AutoConfigureBefore(name = {
-	"org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration",
+	"org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration",
 	"com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration"
 })
 /**

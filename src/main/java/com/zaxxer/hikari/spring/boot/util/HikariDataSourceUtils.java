@@ -3,7 +3,7 @@ package com.zaxxer.hikari.spring.boot.util;
 import javax.sql.DataSource;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceProperties;
 import org.springframework.util.CollectionUtils;
 
 import com.zaxxer.hikari.HikariDataSource;

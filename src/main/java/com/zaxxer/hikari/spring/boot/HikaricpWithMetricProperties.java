@@ -2,6 +2,8 @@ package com.zaxxer.hikari.spring.boot;
 
 import java.util.NoSuchElementException;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
 /**
  * Configuration properties.
  * <p>Binds to the application property prefix and provides
@@ -10,6 +12,7 @@ import java.util.NoSuchElementException;
  * @author [@Loong Wan](https://github.com/loong10k)
  * @since 1.0.0
  */
+@ConfigurationProperties(HikaricpWithMetricProperties.PREFIX)
 public class HikaricpWithMetricProperties {
 
 	public static final String PREFIX = "spring.datasource.hikari.metric";
