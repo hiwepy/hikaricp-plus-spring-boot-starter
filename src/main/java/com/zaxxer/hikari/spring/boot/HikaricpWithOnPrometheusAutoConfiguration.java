@@ -23,6 +23,13 @@ import io.prometheus.client.CollectorRegistry;
 @ConditionalOnClass({ HikariDataSource.class, CollectorRegistry.class })
 @ConditionalOnProperty(prefix = HikaricpWithMetricProperties.PREFIX, value = "type", havingValue = "prometheus", matchIfMissing = false)
 @EnableConfigurationProperties({ HikaricpWithMetricProperties.class })
+/**
+ * Auto-configuration for HikaricpWithOnPrometheus integration.
+ * <p>Registers the necessary beans when the feature is enabled.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class HikaricpWithOnPrometheusAutoConfiguration {
 	
 	@Bean

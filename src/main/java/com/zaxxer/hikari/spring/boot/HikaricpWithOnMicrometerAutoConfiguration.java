@@ -35,6 +35,13 @@ import io.micrometer.core.instrument.util.HierarchicalNameMapper;
 @ConditionalOnClass({ HikariDataSource.class, MetricRegistry.class, MeterRegistry.class })
 @ConditionalOnProperty(prefix = HikaricpWithMetricProperties.PREFIX, value = "type", havingValue = "micrometer", matchIfMissing = false)
 @EnableConfigurationProperties({ HikaricpWithMetricProperties.class })
+/**
+ * Auto-configuration for HikaricpWithOnMicrometer integration.
+ * <p>Registers the necessary beans when the feature is enabled.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class HikaricpWithOnMicrometerAutoConfiguration implements ApplicationContextAware {
 
 	private ApplicationContext applicationContext;

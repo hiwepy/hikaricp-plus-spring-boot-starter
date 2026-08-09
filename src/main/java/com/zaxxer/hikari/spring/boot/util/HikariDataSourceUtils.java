@@ -9,6 +9,12 @@ import org.springframework.util.CollectionUtils;
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.spring.boot.ds.HikaricpDataSourceProperties;
 
+/**
+ * HikariDataSourceUtils class.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class HikariDataSourceUtils {
 
 	public static <T extends DataSource> HikariDataSource createDataSource(HikaricpDataSourceProperties hikariProperties) {

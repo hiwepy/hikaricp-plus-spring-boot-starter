@@ -8,6 +8,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import com.zaxxer.hikari.spring.boot.ds.HikaricpDataSourceProperties;
 
 @ConfigurationProperties(HikaricpProperties.PREFIX)
+/**
+ * Configuration properties.
+ * <p>Binds to the application property prefix and provides
+ * customizable settings.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class HikaricpProperties extends HikaricpDataSourceProperties {
 
 	public static final String PREFIX = "spring.datasource.hikari";

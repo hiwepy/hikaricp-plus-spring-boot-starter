@@ -2,10 +2,24 @@ package com.zaxxer.hikari.spring.boot;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Configuration properties.
+ * <p>Binds to the application property prefix and provides
+ * customizable settings.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class HikaricpWithMetricProperties {
 
 	public static final String PREFIX = "spring.datasource.hikari.metric";
 
+/**
+ * MetricType class.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 	public enum MetricType {
 
 		DROPWIZARD("dropwizard"), MICROMETER("micrometer"), PROMETHEUS("prometheus");

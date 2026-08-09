@@ -16,6 +16,13 @@ import org.springframework.context.annotation.Configuration;
 	"org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration",
 	"com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration"
 })
+/**
+ * Auto-configuration for HikaricpShardingJdbc integration.
+ * <p>Registers the necessary beans when the feature is enabled.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class HikaricpShardingJdbcAutoConfiguration {
 	
 	/**

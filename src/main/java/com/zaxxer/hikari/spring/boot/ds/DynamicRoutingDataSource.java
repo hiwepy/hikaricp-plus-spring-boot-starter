@@ -33,6 +33,12 @@ import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.spring.boot.util.HikariDataSourceUtils;
 
 @SuppressWarnings("unchecked")
+/**
+ * DynamicRoutingDataSource class.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
 	/**

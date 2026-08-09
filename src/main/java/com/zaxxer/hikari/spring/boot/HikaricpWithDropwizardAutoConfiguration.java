@@ -22,6 +22,13 @@ import com.zaxxer.hikari.metrics.dropwizard.CodahaleMetricsTrackerFactory;
 @ConditionalOnClass({ HikariDataSource.class, MetricRegistry.class})
 @ConditionalOnProperty(prefix = HikaricpWithMetricProperties.PREFIX, value = "type", havingValue = "dropwizard", matchIfMissing = false)
 @EnableConfigurationProperties({ HikaricpWithMetricProperties.class })
+/**
+ * Auto-configuration for HikaricpWithDropwizard integration.
+ * <p>Registers the necessary beans when the feature is enabled.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class HikaricpWithDropwizardAutoConfiguration {
 	
 	@Bean
