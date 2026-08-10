@@ -9,7 +9,7 @@ import com.zaxxer.hikari.spring.boot.util.MicrometerSystemClock;
 /**
  * Tests for {@link MicrometerSystemClock}.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class MicrometerSystemClockTest {
 

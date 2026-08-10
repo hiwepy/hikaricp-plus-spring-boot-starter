@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @Configuration
 @ConditionalOnProperty(prefix = HikaricpProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
@@ -20,14 +20,14 @@ import org.springframework.context.annotation.Configuration;
  * Auto-configuration for HikaricpShardingJdbc integration.
  * <p>Registers the necessary beans when the feature is enabled.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class HikaricpShardingJdbcAutoConfiguration {
 	
 	/**
 	 * 配置HikariDataSource
-	 * @author [@Loong Wan](https://github.com/loong10k)
+	 * @author <a href="https://github.com/loong10k">Loong Wan</a>
 	 * @param basicProperties {@link DataSourceProperties} 参数对象
 	 * @param hikariProperties {@link HikaricpProperties} 参数对象
 	 * @return {@link HikariDataSource} 数据源

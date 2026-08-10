@@ -15,7 +15,7 @@ import com.zaxxer.hikari.spring.boot.ds.aspect.DynamicDataSourceSwitchAspect;
 /**
  * Tests for {@link DynamicDataSourceSwitchAspect}.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class DynamicDataSourceSwitchAspectTest {
 

@@ -15,7 +15,7 @@ import io.prometheus.client.CollectorRegistry;
 /**
  * Tests for {@link HikaricpWithOnPrometheusAutoConfiguration}.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class HikaricpWithOnPrometheusAutoConfigurationTest {
 

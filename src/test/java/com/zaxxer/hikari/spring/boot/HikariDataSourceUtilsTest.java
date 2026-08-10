@@ -13,7 +13,7 @@ import com.zaxxer.hikari.spring.boot.util.HikariDataSourceUtils;
 /**
  * Tests for {@link HikariDataSourceUtils}.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class HikariDataSourceUtilsTest {
 

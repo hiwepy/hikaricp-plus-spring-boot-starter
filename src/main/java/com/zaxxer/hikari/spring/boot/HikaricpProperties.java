@@ -13,7 +13,7 @@ import com.zaxxer.hikari.spring.boot.ds.HikaricpDataSourceProperties;
  * <p>Binds to the application property prefix and provides
  * customizable settings.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class HikaricpProperties extends HikaricpDataSourceProperties {

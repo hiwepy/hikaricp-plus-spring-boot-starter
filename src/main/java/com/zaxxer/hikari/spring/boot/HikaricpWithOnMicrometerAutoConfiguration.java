@@ -28,7 +28,7 @@ import io.micrometer.core.instrument.util.HierarchicalNameMapper;
 
 /**
  * 基于Micrometer监控组件的HikariDataSource监控
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )
@@ -39,7 +39,7 @@ import io.micrometer.core.instrument.util.HierarchicalNameMapper;
  * Auto-configuration for HikaricpWithOnMicrometer integration.
  * <p>Registers the necessary beans when the feature is enabled.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class HikaricpWithOnMicrometerAutoConfiguration implements ApplicationContextAware {

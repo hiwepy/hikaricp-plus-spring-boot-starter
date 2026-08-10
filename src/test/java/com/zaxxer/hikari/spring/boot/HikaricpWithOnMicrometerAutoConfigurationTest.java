@@ -18,7 +18,7 @@ import io.micrometer.core.instrument.MeterRegistry;
 /**
  * Tests for {@link HikaricpWithOnMicrometerAutoConfiguration}.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class HikaricpWithOnMicrometerAutoConfigurationTest {
 
