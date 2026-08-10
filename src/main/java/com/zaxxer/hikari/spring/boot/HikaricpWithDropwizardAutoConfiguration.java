@@ -15,7 +15,7 @@ import com.zaxxer.hikari.metrics.dropwizard.CodahaleMetricsTrackerFactory;
 
 /**
  * 基于Dropwizard监控组件的HikariDataSource监控
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )
