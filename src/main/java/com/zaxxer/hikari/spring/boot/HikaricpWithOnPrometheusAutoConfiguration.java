@@ -16,7 +16,7 @@ import io.prometheus.client.CollectorRegistry;
 
 /**
  * 基于Prometheus监控平台的HikariDataSource监控
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )
