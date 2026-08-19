@@ -14,6 +14,7 @@
     <description>Spring Boot Starter For HikariCP</description>
     <version>4.1.x.20260630-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
+            <url>https://github.com/loong10k</url>
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
     <packaging>jar</packaging>
 
