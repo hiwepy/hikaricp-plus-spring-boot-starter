@@ -25,8 +25,9 @@ import java.lang.annotation.Target;
 import org.springframework.biz.jdbc.DataSourceRoutingKeyHolder;
 
 /**
- * 用于方法注释；是否切换数据源及切换的数据源名称
+ * Method-level annotation for switching the target data source by name
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
@@ -35,7 +36,7 @@ import org.springframework.biz.jdbc.DataSourceRoutingKeyHolder;
 public @interface SwitchRepository {
 
 	/**
-	 * 数据源名称
+	 * The data source name
 	 */
 	public String value() default DataSourceRoutingKeyHolder.MASTER_DATASOURCE;
 	

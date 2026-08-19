@@ -13,10 +13,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.metrics.MetricsTrackerFactory;
 import com.zaxxer.hikari.metrics.dropwizard.CodahaleMetricsTrackerFactory;
 
-/**
- * 基于Dropwizard监控组件的HikariDataSource监控
- * @author <a href="https://github.com/loong10k">Loong Wan</a>
- */
+
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )
 @ConditionalOnClass({ HikariDataSource.class, MetricRegistry.class})
@@ -30,12 +27,21 @@ import com.zaxxer.hikari.metrics.dropwizard.CodahaleMetricsTrackerFactory;
  * @since 1.0.0
  */
 public class HikaricpWithDropwizardAutoConfiguration {
+	/**
+	 * <p>Registry.</p>
+	 * @return the metric registry
+	 */
 	
 	@Bean
 	@ConditionalOnMissingBean
 	public MetricRegistry registry() {
 		return new MetricRegistry();
 	}
+	/**
+	 * <p>Durid filter registration bean.</p>
+	 * @param registry the registry
+	 * @return the metrics tracker factory
+	 */
 	
 	@Bean
 	@ConditionalOnMissingBean(value = MetricsTrackerFactory.class)

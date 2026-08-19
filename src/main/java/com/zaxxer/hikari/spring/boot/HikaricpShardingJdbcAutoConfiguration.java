@@ -6,9 +6,6 @@ import org.springframework.boot.jdbc.autoconfigure.DataSourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @author <a href="https://github.com/loong10k">Loong Wan</a>
- */
 @Configuration
 @ConditionalOnProperty(prefix = HikaricpProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties({ HikaricpProperties.class, DataSourceProperties.class })
@@ -26,39 +23,45 @@ import org.springframework.context.annotation.Configuration;
 public class HikaricpShardingJdbcAutoConfiguration {
 	
 	/**
-	 * 配置HikariDataSource
+	 * Creates and configures the primary HikariDataSource bean
 	 * @author <a href="https://github.com/loong10k">Loong Wan</a>
-	 * @param basicProperties {@link DataSourceProperties} 参数对象
-	 * @param hikariProperties {@link HikaricpProperties} 参数对象
-	 * @return {@link HikariDataSource} 数据源
+	 * @param basicProperties {@link DataSourceProperties} the configuration properties
+	 * @param hikariProperties {@link HikaricpProperties} the configuration properties
+	 * @return {@link HikariDataSource} the data source
+	/**
+	 * <p>Data source.</p>
+	 * @param basicProperties the basic properties
+	 * @param hikariProperties the hikari properties
+	 * @return the data source
+	 */
 	
 	@Bean
 	@Primary
 	public DataSource dataSource(DataSourceProperties basicProperties, HikaricpProperties hikariProperties) {
 		
-		// 动态数据源
+		// Dynamic data source
 		if(hikariProperties.isRoutable()) {
 			
 			Map<Object, Object> targetDataSources = new HashMap<Object, Object>();
 			
-			//基于配置文件的动态数据源信息
+			//Dynamic data source information based on configuration
 			if (!CollectionUtils.isEmpty(hikariProperties.getSlaves())) {
 				for (HikaricpDataSourceProperties slaveProperties : hikariProperties.getSlaves()) {
-					// 动态创建Hikari数据源
+					// Dynamically creates a HikariDataSource
 					HikariDataSource slaveDataSource = HikariDataSourceUtils.createDataSource(configureProperties(basicProperties, hikariProperties));
 					targetDataSources.put(slaveProperties.getName(), slaveDataSource);
 				}
 			}
 			
-			// 动态数据源支持
+			// Dynamic data source support
 			DynamicRoutingDataSource dataSource = new DynamicRoutingDataSource();
-			dataSource.setTargetDataSources(targetDataSources);// 该方法是AbstractRoutingDataSource的方法
+			dataSource.setTargetDataSources(targetDataSources);// This method is AbstractRoutingDataSource的方法
 			
-			// 默认的数据源
+			// Default data source
 			HikariDataSource masterDataSource = HikariDataSourceUtils.createDataSource(configureProperties(basicProperties, hikariProperties));
-			dataSource.setDefaultTargetDataSource(masterDataSource);// 默认的datasource设置为myTestDbDataSource
+			dataSource.setDefaultTargetDataSource(masterDataSource);// The default datasource is set to myTestDbDataSource
 			
-			// 配置真实数据源
+			// Configure real data sources
 		    Map<String, DataSource> dataSourceMap = new HashMap<>();
 			
 		    
@@ -72,6 +75,12 @@ public class HikaricpShardingJdbcAutoConfiguration {
 		return HikariDataSourceUtils.createDataSource(configureProperties(basicProperties, hikariProperties));
 			
 	}
+	/**
+	 * <p>Configure properties.</p>
+	 * @param basicProperties the basic properties
+	 * @param hikariProperties the hikari properties
+	 * @return the hikaricp data source properties
+	 */
 	
 	private HikaricpDataSourceProperties configureProperties(DataSourceProperties basicProperties, HikaricpDataSourceProperties hikariProperties) {
 		//if not found prefix 'spring.datasource.hikari' jdbc properties ,'spring.datasource' prefix jdbc properties will be used.

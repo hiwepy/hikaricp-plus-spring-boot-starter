@@ -42,7 +42,7 @@ import com.zaxxer.hikari.spring.boot.util.HikariDataSourceUtils;
 public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
 	/**
-     * 用于在维护数据源时保证不会被其他线程修改
+     * Lock to ensure thread-safe data source maintenance
      */
     private static Lock lock = new ReentrantLock();
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
@@ -50,12 +50,17 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 			"targetDataSources");
 	protected static Field resolvedDataSourcesField = ReflectionUtils.findField(DynamicRoutingDataSource.class,
 			"resolvedDataSources");
+	/**
+	 * <p>Determine current lookup key.</p>
+	 * @return the object
+	 */
 	
 	@Override
 	protected Object determineCurrentLookupKey() {
 		 logger.info("Current DataSource is [{}]", DataSourceRoutingKeyHolder.getDataSourceKey());
 		return DataSourceRoutingKeyHolder.getDataSourceKey();
 	}
+	/** Gets the target data sources. */
 	
 	public Map<Object, Object> getTargetDataSources() {
 		targetDataSourcesField.setAccessible(true);
@@ -63,6 +68,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 		targetDataSourcesField.setAccessible(false);
 		return (Map<Object, Object>) targetDataSources;
 	}
+	/** Gets the resolved data sources. */
 
 	public Map<Object, DataSource> getResolvedDataSources() {
 		resolvedDataSourcesField.setAccessible(true);
@@ -70,6 +76,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 		resolvedDataSourcesField.setAccessible(false);
 		return (Map<Object, DataSource>) resolvedDataSources;
 	}
+	/** Sets the target data source. */
 	
 	public void setTargetDataSource(String name, DataSourceProperties basicProperties, HikaricpDataSourceProperties hikariProperties) {
 
@@ -91,7 +98,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 	        	hikariProperties.setDriverClassName(basicProperties.determineDriverClassName());
 	        }
 			
-			// 动态创建Hikari数据源
+			// Dynamically creates a HikariDataSource
 			HikariDataSource targetDataSource = HikariDataSourceUtils.createDataSource(hikariProperties);
 
 			getTargetDataSources().put(name, targetDataSource);
@@ -104,10 +111,12 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         }
 		
 	}
+	/** Sets the target data source. */
 	
 	public void setTargetDataSource(DataSourceProperties properties, HikaricpDataSourceProperties hikariProperties) {
 		this.setTargetDataSource(hikariProperties.getName(), properties, hikariProperties);
 	}
+	/** Sets the new target data sources. */
 
 	public void setNewTargetDataSources(Map<Object, Object> targetDataSources) {
 		
@@ -123,6 +132,10 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 	        lock.unlock();
 	    }
 	}
+	/**
+	 * <p>Remove target data source.</p>
+	 * @param name the name
+	 */
 
 	public void removeTargetDataSource(String name) {
 		
@@ -138,6 +151,9 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 	        lock.unlock();
 	    }
 	}
+	/**
+	 * <p>After properties set.</p>
+	 */
 	
 	@Override
 	public void afterPropertiesSet() {

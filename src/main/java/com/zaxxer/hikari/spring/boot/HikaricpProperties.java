@@ -32,26 +32,38 @@ public class HikaricpProperties extends HikaricpDataSourceProperties {
 	 * Datasource slaves 
 	 */
 	private List<HikaricpDataSourceProperties> slaves = new ArrayList<HikaricpDataSourceProperties>();
+	/**
+	 * <p>Is enabled.</p>
+	 * @return the boolean
+	 */
 
 	public boolean isEnabled() {
 		return enabled;
 	}
+	/** Sets the enabled. */
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	/**
+	 * <p>Is routable.</p>
+	 * @return the boolean
+	 */
 	
 	public boolean isRoutable() {
 		return routable;
 	}
+	/** Sets the routable. */
 
 	public void setRoutable(boolean routable) {
 		this.routable = routable;
 	}
+	/** Gets the slaves. */
 
 	public List<HikaricpDataSourceProperties> getSlaves() {
 		return slaves;
 	}
+	/** Sets the slaves. */
 
 	public void setSlaves(List<HikaricpDataSourceProperties> slaves) {
 		this.slaves = slaves;

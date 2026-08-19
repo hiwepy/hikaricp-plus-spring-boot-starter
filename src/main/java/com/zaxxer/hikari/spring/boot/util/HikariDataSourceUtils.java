@@ -16,6 +16,11 @@ import com.zaxxer.hikari.spring.boot.ds.HikaricpDataSourceProperties;
  * @since 1.0.0
  */
 public class HikariDataSourceUtils {
+	/**
+	 * <p>Create data source.</p>
+	 * @param hikariProperties the hikari properties
+	 * @return the static < t extends  data source>  hikari data source
+	 */
 
 	public static <T extends DataSource> HikariDataSource createDataSource(HikaricpDataSourceProperties hikariProperties) {
 		
@@ -23,70 +28,82 @@ public class HikariDataSourceUtils {
 		
 		tmProperties.setName(hikariProperties.getName());
 		tmProperties.setType(com.zaxxer.hikari.HikariDataSource.class);
-		// driverClassName : 数据库驱动 
+		// driverClassName : The JDBC driver class name 
 		tmProperties.setDriverClassName(hikariProperties.getDriverClassName());
-		// jdbcUrl: 连接数据库的url
+		// jdbcUrl: The JDBC URL for the database connection
 		tmProperties.setUrl(hikariProperties.getJdbcUrl());
-		// username: 连接数据库的用户名
+		// username: The username for the database connection
 		tmProperties.setUsername(hikariProperties.getUsername());
-		// password: 连接数据库的密码
+		// password: The password for the database connection
 		tmProperties.setPassword(hikariProperties.getPassword());
 		
-		// 创建 HikariDataSource 数据源对象
+		// 创建 HikariDataSource the data source对象
 		HikariDataSource dataSource = createDataSource(tmProperties, tmProperties.getType());
-		// 配置 Hikari数据源
+		// 配置 Hikarithe data source
 		configureProperties(hikariProperties, dataSource);
 		
 		return dataSource;
 	}
+	/**
+	 * <p>Create data source.</p>
+	 * @param properties the properties
+	 * @param type the type
+	 * @return the static < t>  t
+	 */
 
 	@SuppressWarnings("unchecked")
 	public static <T> T createDataSource(DataSourceProperties properties, Class<? extends DataSource> type) {
 		return (T) properties.initializeDataSourceBuilder().type(type).build();
 	}
+	/**
+	 * <p>Configure properties.</p>
+	 * @param hikariProperties the hikari properties
+	 * @param dataSource the data source
+	 * @return the static void
+	 */
 	
 	public static void configureProperties(HikaricpDataSourceProperties hikariProperties, HikariDataSource dataSource) {
 
 		// Hikari 连接池参数
 		
-		// initializationFailTimeout: 连接池初始化失败超时时间；单位 (毫秒) 
+		// initializationFailTimeout: Connection pool initialization failure timeout in milliseconds；单位 (毫秒) 
 		dataSource.setInitializationFailTimeout(hikariProperties.getInitializationFailTimeout());
-		// minIdle: 连接池最小连接数量 
+		// minIdle: Minimum number of idle connections in the pool 
 		dataSource.setMinimumIdle(hikariProperties.getMinIdle());
-		// maxPoolSize: 连接池最大连接数量 
+		// maxPoolSize: Maximum number of connections in the pool 
 		dataSource.setMaximumPoolSize(hikariProperties.getMaxPoolSize());
-		// maxLifetime: 连接存活时间 
+		// maxLifetime: Maximum lifetime of a connection in milliseconds 
 		dataSource.setMaxLifetime(hikariProperties.getMaxLifetime());
 
 		if (StringUtils.isNotEmpty(hikariProperties.getConnectionInitSql())) {
-			// connectionInitSql: 连接初始化SQL语句,在连接加入连接池前执行 
+			// connectionInitSql: SQL statement executed to initialize a connection before adding it to the pool,在连接加入连接池前执行 
 			dataSource.setConnectionInitSql(hikariProperties.getConnectionInitSql());
 			
 		}
 		if (StringUtils.isNotEmpty(hikariProperties.getConnectionTestQuery())) {
-			// connectionTestQuery: 连接有效性检查SQL语句,当执行连接检查时执行 
+			// connectionTestQuery: SQL statement used to test connection validity,当执行连接检查时执行 
 			dataSource.setConnectionTestQuery(hikariProperties.getConnectionTestQuery());
-			// validationTimeout: 连接检查超时时间；单位 (毫秒) 
+			// validationTimeout: Connection validation timeout in milliseconds；单位 (毫秒) 
 			dataSource.setValidationTimeout(hikariProperties.getValidationTimeout());
 		}
 		
-		// connectionTimeout: 连接初始化超时时间；单位 (毫秒) 
+		// connectionTimeout: Connection acquisition timeout in milliseconds；单位 (毫秒) 
 		dataSource.setConnectionTimeout(hikariProperties.getConnectionTimeout());
-		// idleTimeout: 连接空闲超时时间，当一个连接超出该时间，会被释放；单位 (毫秒) 
+		// idleTimeout: Maximum idle time for a connection before release, in milliseconds，当一个连接超出该时间，会被释放；单位 (毫秒) 
 		dataSource.setIdleTimeout(hikariProperties.getIdleTimeout());
-		// transactionIsolationName: 事务隔离名称 
+		// transactionIsolationName: Transaction isolation level name 
 		dataSource.setTransactionIsolation(hikariProperties.getTransactionIsolationName());
-		// autoCommit: 是否自动提交事务 
+		// autoCommit: Whether to auto-commit transactions 
 		dataSource.setAutoCommit(hikariProperties.isAutoCommit());
-		// readOnly: 是否只读 
+		// readOnly: Whether the connection is read-only 
 		dataSource.setReadOnly(hikariProperties.isReadOnly());
-		// isolateInternalQueries: 是否内部查询事务隔离 
+		// isolateInternalQueries: Whether to isolate internal queries in their own transaction 
 		dataSource.setIsolateInternalQueries(hikariProperties.isIsolateInternalQueries());
-		// registerMbeans: 是否注册JMX监控参数输出 
+		// registerMbeans: Whether to register JMX monitoring beans 
 		dataSource.setRegisterMbeans(hikariProperties.isRegisterMbeans());
-		// allowPoolSuspension: 是否允许连接池暂停 
+		// allowPoolSuspension: Whether to allow the connection pool to be suspended 
 		dataSource.setAllowPoolSuspension(hikariProperties.isAllowPoolSuspension());
-		// leakDetectionThreshold: 泄漏检测阈值 ; leakDetectionThreshold is less than 2000ms or more than maxLifetime, disabling it
+		// leakDetectionThreshold: Leak detection threshold in milliseconds ; leakDetectionThreshold is less than 2000ms or more than maxLifetime, disabling it
 		dataSource.setLeakDetectionThreshold(hikariProperties.getLeakDetectionThreshold());
 		
 		if (StringUtils.isNotEmpty(hikariProperties.getJndiName())) {

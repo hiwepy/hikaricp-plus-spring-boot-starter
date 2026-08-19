@@ -26,8 +26,9 @@ import org.springframework.stereotype.Component;
 import com.zaxxer.hikari.spring.boot.ds.annotation.SwitchRepository;
 
 /**
- * 数据源自动切换切面
+ * Aspect that automatically switches the data source based on @SwitchRepository annotation
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 @Aspect
 @Component
@@ -35,7 +36,14 @@ public class DynamicDataSourceSwitchAspect {
 	
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 	
-	//环绕通知   
+	//Around advice   
+	/**
+	 * <p>Around.</p>
+	 * @param joinPoint the join point
+	 * @param repository the repository
+	 * @return the object
+	 * @throws Throwable if an error occurs
+	 */
 	@Around("@annotation(com.zaxxer.hikari.spring.boot.ds.annotation.SwitchRepository) and @annotation(repository)")
 	public Object around(ProceedingJoinPoint joinPoint, SwitchRepository repository) throws Throwable {
 		String oldRepository = DataSourceRoutingKeyHolder.getDataSourceKey();

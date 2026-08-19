@@ -26,10 +26,7 @@ import io.micrometer.core.instrument.composite.CompositeMeterRegistry;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import io.micrometer.core.instrument.util.HierarchicalNameMapper;
 
-/**
- * 基于Micrometer监控组件的HikariDataSource监控
- * @author <a href="https://github.com/loong10k">Loong Wan</a>
- */
+
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )
 @ConditionalOnClass({ HikariDataSource.class, MetricRegistry.class, MeterRegistry.class })
@@ -45,18 +42,31 @@ import io.micrometer.core.instrument.util.HierarchicalNameMapper;
 public class HikaricpWithOnMicrometerAutoConfiguration implements ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
+	/**
+	 * <p>Clock.</p>
+	 * @return the clock
+	 */
 	
 	@Bean
 	@ConditionalOnMissingBean
 	public Clock clock() {
 		return MicrometerSystemClock.instance();
 	}
+	/**
+	 * <p>Name mapper.</p>
+	 * @return the hierarchical name mapper
+	 */
 	
 	@Bean
 	@ConditionalOnMissingBean
 	public HierarchicalNameMapper nameMapper() {
 		return HierarchicalNameMapper.DEFAULT;
 	}
+	/**
+	 * <p>Meter registry.</p>
+	 * @param clock the clock
+	 * @return the meter registry
+	 */
 	
 	@Bean
 	@ConditionalOnMissingBean(value = MetricsTrackerFactory.class)
@@ -69,6 +79,11 @@ public class HikaricpWithOnMicrometerAutoConfiguration implements ApplicationCon
 		
 		return new SimpleMeterRegistry();
 	}
+	/**
+	 * <p>Durid filter registration bean.</p>
+	 * @param registry the registry
+	 * @return the metrics tracker factory
+	 */
 	
 	@Bean
 	@ConditionalOnMissingBean(value = MetricsTrackerFactory.class)
@@ -76,11 +91,13 @@ public class HikaricpWithOnMicrometerAutoConfiguration implements ApplicationCon
 		MetricsTrackerFactory metricsTrackerFactory = new MicrometerMetricsTrackerFactory(registry);
 		return metricsTrackerFactory;
 	}
+	/** Sets the application context. */
 	
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
 	}
+	/** Gets the application context. */
 
 	public ApplicationContext getApplicationContext() {
 		return applicationContext;

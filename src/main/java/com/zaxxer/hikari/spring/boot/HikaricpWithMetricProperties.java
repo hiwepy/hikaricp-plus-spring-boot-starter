@@ -4,14 +4,6 @@ import java.util.NoSuchElementException;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/**
- * Configuration properties.
- * <p>Binds to the application property prefix and provides
- * customizable settings.</p>
- *
- * @author <a href="https://github.com/loong10k">Loong Wan</a>
- * @since 1.0.0
- */
 @ConfigurationProperties(HikaricpWithMetricProperties.PREFIX)
 public class HikaricpWithMetricProperties {
 
@@ -32,18 +24,37 @@ public class HikaricpWithMetricProperties {
 		MetricType(String metricType) {
 			this.metricType = metricType;
 		}
+		/**
+		 * <p>Get.</p>
+		 * @return the string
+		 */
 
 		public String get() {
 			return metricType;
 		}
+		/**
+		 * <p>Equals.</p>
+		 * @param metricType the metric type
+		 * @return the boolean
+		 */
 
 		public boolean equals(MetricType metricType) {
 			return this.compareTo(metricType) == 0;
 		}
+		/**
+		 * <p>Equals.</p>
+		 * @param metricType the metric type
+		 * @return the boolean
+		 */
 
 		public boolean equals(String metricType) {
 			return this.compareTo(MetricType.valueOfIgnoreCase(metricType)) == 0;
 		}
+		/**
+		 * <p>Value of ignore case.</p>
+		 * @param key the key
+		 * @return the static  metric type
+		 */
 
 		public static MetricType valueOfIgnoreCase(String key) {
 			for (MetricType metricType : MetricType.values()) {
@@ -58,18 +69,25 @@ public class HikaricpWithMetricProperties {
 
 	private boolean enabled = false;
 	private MetricType type = MetricType.DROPWIZARD;
+	/**
+	 * <p>Is enabled.</p>
+	 * @return the boolean
+	 */
 
 	public boolean isEnabled() {
 		return enabled;
 	}
+	/** Sets the enabled. */
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	/** Gets the type. */
 
 	public MetricType getType() {
 		return type;
 	}
+	/** Sets the type. */
 
 	public void setType(MetricType type) {
 		this.type = type;

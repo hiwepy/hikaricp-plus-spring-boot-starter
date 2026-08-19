@@ -14,10 +14,7 @@ import com.zaxxer.hikari.metrics.prometheus.PrometheusMetricsTrackerFactory;
 
 import io.prometheus.client.CollectorRegistry;
 
-/**
- * 基于Prometheus监控平台的HikariDataSource监控
- * @author <a href="https://github.com/loong10k">Loong Wan</a>
- */
+
 @Configuration
 @ConditionalOnBean( HikariDataSource.class )
 @ConditionalOnClass({ HikariDataSource.class, CollectorRegistry.class })
@@ -31,6 +28,10 @@ import io.prometheus.client.CollectorRegistry;
  * @since 1.0.0
  */
 public class HikaricpWithOnPrometheusAutoConfiguration {
+	/**
+	 * <p>Durid filter registration bean.</p>
+	 * @return the metrics tracker factory
+	 */
 	
 	@Bean
 	@ConditionalOnMissingBean(value = MetricsTrackerFactory.class)
